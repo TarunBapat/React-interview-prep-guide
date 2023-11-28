@@ -714,3 +714,513 @@ This method is called when there is an error during rendering, allowing the comp
 1. **componentDidCatch(error, info):**
 This method is called after an error has been thrown during rendering. It's used for logging and reporting errors.
 It's important to note that with the introduction of React Hooks in React 16.8, functional components now have access to similar lifecycle methods and stateful logic using hooks like useEffect and useState.
+
+# What is PropDrilling? And how can we avoid it?
+Prop drilling, also known as "threading props" or "component composition," occurs when you pass down props through multiple layers of components, and some intermediary components do not actually use those props but are required to pass them along to their child components. This can make the code less maintainable and harder to understand.
+
+Consider the following example:
+
+```jsx
+// Grandparent Component
+const Grandparent = ({ data }) => (
+  <Parent data={data} />
+);
+
+// Parent Component
+const Parent = ({ data }) => (
+  <Child data={data} />
+);
+
+// Child Component
+const Child = ({ data }) => (
+  <Grandchild data={data} />
+);
+
+// Grandchild Component
+const Grandchild = ({ data }) => (
+  <div>{data}</div>
+);
+```
+In this example, the Grandparent component receives the data prop but doesn't use it. It simply passes it down to the Parent component, which, in turn, passes it down to the Child component, and finally, it reaches the Grandchild component where it is used. This is prop drilling.
+
+To avoid prop drilling and make the code more maintainable, you can use techniques like:
+
+**Context API:**
+React provides a Context API that allows you to share values like props across the component tree without explicitly passing them through each level. This can help avoid prop drilling by creating a context and providing it at a higher level in the component tree.
+Example:
+
+```jsx
+// Create a context
+const DataContext = React.createContext();
+
+// Grandparent Component
+const Grandparent = ({ data }) => (
+  <DataContext.Provider value={data}>
+    <Parent />
+  </DataContext.Provider>
+);
+
+// Child Component
+const Child = () => (
+  <Grandchild />
+);
+
+// Grandchild Component
+const Grandchild = () => (
+  <DataContext.Consumer>
+    {data => <div>{data}</div>}
+  </DataContext.Consumer>
+);
+```
+**Redux or State Management:**
+Using a state management library like Redux can centralize the state of your application, making it accessible to any component without the need for prop drilling.
+
+**Component Composition:**
+Instead of passing down props through multiple layers, consider breaking your components into smaller, more focused components that only receive the props they need. This can help reduce the need for passing unnecessary props through intermediary components.
+Remember that the appropriate solution may depend on the specific requirements and structure of your application. Context API and state management libraries are powerful tools, but they come with their own trade-offs, so choose the approach that best fits your needs.
+
+# What is the difference between useMemo and useCallback Hook?
+
+useMemo and useCallback are both React Hooks designed to optimize performance by memoizing values and functions, respectively.
+
+**useMemo:**
+useMemo is used to memoize the result of a computation. It takes a function and an array of dependencies. The function will only be recomputed when one of the dependencies has changed.
+
+```jsx
+import React, { useMemo } from 'react';
+
+const MyComponent = ({ data }) => {
+  const expensiveComputation = useMemo(() => {
+    // Perform some expensive computation based on data
+    return data.map(item => item * 2);
+  }, [data]);
+
+  return (
+    <div>
+      {/* Use the result of the memoized computation */}
+      {expensiveComputation}
+    </div>
+  );
+};
+```
+In this example, expensiveComputation will only be recomputed when the data prop changes.
+
+**useCallback:**
+useCallback is used to memoize functions, especially useful when passing functions to child components to prevent unnecessary re-renders. It takes a function and an array of dependencies, and it returns a memoized version of the function.
+
+```jsx
+import React, { useState, useCallback } from 'react';
+
+const ParentComponent = () => {
+  const [count, setCount] = useState(0);
+
+  // Without useCallback, this function would be recreated on each render
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  return (
+    <ChildComponent onClick={handleClick} />
+  );
+};
+
+const ChildComponent = ({ onClick }) => {
+  return (
+    <button onClick={onClick}>Click me</button>
+  );
+};
+```
+In this example, handleClick will only be recreated if the count state changes. Without useCallback, a new function would be created on each render, causing unnecessary re-renders of the ChildComponent.
+
+**In summary:**
+
+Use useMemo when you want to memoize the result of a computation.
+Use useCallback when you want to memoize a function, especially when passing it as a prop to child components.
+
+# What are controlled and uncontrolled components?
+Controlled and uncontrolled components are terms used in the context of form elements in React. They describe how the state of a form element is managed in a React component.
+
+**Controlled Components:**
+In a controlled component, React maintains the state of the form elements. The component's state is used as the "single source of truth" for the input elements, and the value of the input is controlled by React through state.
+
+Example of a controlled input element:
+
+```jsx
+Copy code
+import React, { useState } from 'react';
+
+const ControlledComponent = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  return (
+    <input type="text" value={inputValue} onChange={handleChange} />
+  );
+};
+```
+In this example, the input value is controlled by the inputValue state, and the handleChange function updates the state whenever the input changes.
+
+**Uncontrolled Components:**
+In an uncontrolled component, the state of the form elements is not controlled by React. Instead, the DOM itself maintains the state, and you interact with the DOM directly to get or set the values.
+
+Example of an uncontrolled input element:
+
+```jsx
+Copy code
+import React, { useRef } from 'react';
+
+const UncontrolledComponent = () => {
+  const inputRef = useRef();
+
+  const handleClick = () => {
+    // Accessing the current value of the input directly from the DOM
+    alert(`Input value: ${inputRef.current.value}`);
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick}>Get Value</button>
+    </div>
+  );
+};
+```
+In this example, the input value is not controlled by React state. Instead, it is accessed directly from the DOM using the ref attribute.
+
+**Choosing Between Controlled and Uncontrolled Components:**
+Controlled components are generally preferred in React because they make it easier to manage and manipulate the form data. React has more control over the input, and you can implement features like validation and dynamic updates more easily.
+
+Uncontrolled components might be useful in certain situations, especially when integrating React with non-React code or when working with complex forms that need to be handled outside of React's state management.
+
+The choice between controlled and uncontrolled components depends on the specific requirements and use case of your application. Controlled components are more idiomatic in React and align with the React philosophy of declarative UI and single source of truth.
+
+
+# What is Lifting state up in React?
+Lifting state up is a pattern in React where you move the state of a component higher up in the component hierarchy to make it accessible to multiple child components. This pattern is used when multiple components need to share and synchronize the same state.
+
+The primary motivation for lifting state up is to ensure that the state is maintained in a common ancestor, allowing different components to read from and update that shared state. This promotes a single source of truth and avoids the need to pass state through multiple layers of components via props (prop drilling).
+
+Here's a simple example to illustrate the concept of lifting state up:
+
+```jsx
+import React, { useState } from 'react';
+
+// Child Component
+const ChildComponent = ({ count, onIncrement }) => (
+  <div>
+    <p>Count: {count}</p>
+    <button onClick={onIncrement}>Increment</button>
+  </div>
+);
+
+// Parent Component (Stateful Component)
+const ParentComponent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <ChildComponent count={count} onIncrement={handleIncrement} />
+    </div>
+  );
+};
+
+// App Component
+const App = () => (
+  <div>
+    <h1>App Component</h1>
+    <ParentComponent />
+  </div>
+);
+
+export default App;
+```
+
+In this example:
+
+- The `ParentComponent` maintains the state (`count`) using the `useState` hook.
+- The `ChildComponent` receives the `count` as a prop and a function (`onIncrement`) to update the state.
+- When the "Increment" button in the `ChildComponent` is clicked, it calls the `onIncrement` function provided by the `ParentComponent`, which updates the shared state.
+
+By lifting the state up to the common ancestor (`ParentComponent`), both the parent and child components have access to the same state. This pattern is particularly useful when you have multiple components that need to share and modify the same data. It helps in avoiding prop drilling and makes the code more maintainable and scalable.
+
+# What is the state and why do we use it?
+In React, "state" refers to an object that represents the current condition or data of a component. It is used to manage and store dynamic data that can change over time in response to user actions, server responses, or other sources of data.
+
+In class components, you can define and manage state using the `this.state` object, while in functional components, you can use the `useState` hook to introduce state.
+
+Here's a brief overview of the key aspects of state in React:
+
+1. **Dynamic Data:**
+   - State is particularly useful when dealing with data that changes during the lifetime of a component. This could include user input, server responses, or any other form of dynamic data.
+
+2. **Reactivity:**
+   - When the state of a component changes, React automatically triggers a re-render of the component, updating the user interface to reflect the new state. This reactivity is a core feature of React and allows for a more declarative style of programming.
+
+3. **Local to Component:**
+   - Each component can have its own state, and changes to one component's state don't affect the state of other components. This encapsulation makes it easier to reason about and manage the state of individual components.
+
+4. **Initialization:**
+   - State can be initialized with default values when a component is created. This provides an initial state for the component before any user interaction or data fetching occurs.
+
+5. **Updating State:**
+   - In React, you should not directly modify the state. Instead, you use the `setState` method (for class components) or the state updater function (for functional components) provided by React. This ensures that React can properly track changes and trigger the necessary updates.
+
+Here's a simple example using the `useState` hook in a functional component:
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  // Declare a state variable named 'count' with an initial value of 0
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+```
+
+In this example, `count` is a piece of state that represents the current count. The `setCount` function is used to update the state, and any changes to the state trigger a re-render of the component.
+
+Overall, state is a fundamental concept in React, enabling the creation of interactive and dynamic user interfaces by managing and reacting to changes in data over time.
+
+# Can we directly modify or update state?
+In React, it's important to follow the principle of immutability when working with state. Directly modifying or updating the state object is not allowed, as React relies on a process called reconciliation to determine what parts of the UI need to be updated. If the state object is mutated directly, React may not detect the changes properly, leading to unexpected behavior and bugs.
+
+Instead of modifying the state directly, React provides methods for updating state in a way that respects immutability. For class components, you use the `setState` method, and for functional components, you use the state updater function returned by the `useState` hook.
+
+**Class Components:**
+
+In a class component, you use the `setState` method to update the state. This method takes an object or a function as an argument, where the function receives the previous state and props.
+
+```jsx
+class Counter extends React.Component {
+  state = {
+    count: 0,
+  };
+
+  increment = () => {
+    // Incorrect way (mutating state directly)
+    // this.state.count += 1;
+
+    // Correct way using setState
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+```
+
+**Functional Components with `useState`:**
+
+In a functional component using the `useState` hook, you receive a state updater function that allows you to update the state based on its previous value.
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    // Incorrect way (mutating state directly)
+    // count += 1;
+
+    // Correct way using setCount
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+```
+
+By using the provided state updater functions (`setState` in class components, and the function returned by `useState` in functional components), you ensure that React is aware of state changes and can properly trigger component updates as needed. This approach helps maintain the integrity of React's virtual DOM and promotes predictable behavior in your application.
+
+
+# What can we pass in Props?
+In React, props (short for "properties") are a mechanism for passing data from a parent component to a child component. Props are a fundamental concept in React, and they are used to make components dynamic and reusable. You can pass various types of values as props to components. Here's what you can pass in props:
+
+1. **Primitives:**
+   - You can pass primitive values such as strings, numbers, booleans, and null as props.
+
+    ```jsx
+    <ChildComponent text="Hello, props!" number={42} isActive={true} />
+    ```
+
+2. **Functions:**
+   - Functions can be passed as props, allowing child components to call functions defined in the parent component.
+
+    ```jsx
+    // ParentComponent.js
+    const ParentComponent = ({ handleClick }) => (
+      <ChildComponent onClick={handleClick} />
+    );
+
+    // ChildComponent.js
+    const ChildComponent = ({ onClick }) => (
+      <button onClick={onClick}>Click me</button>
+    );
+    ```
+
+3. **Objects:**
+   - Objects can be passed as props, providing a way to send structured data to a child component.
+
+    ```jsx
+    const user = { name: 'John', age: 25 };
+    <UserProfile user={user} />
+    ```
+
+4. **Arrays:**
+   - Arrays can be passed as props, allowing you to pass a collection of data to a child component.
+
+    ```jsx
+    const items = ['Apple', 'Banana', 'Orange'];
+    <ItemList items={items} />
+    ```
+
+5. **React Elements:**
+   - React elements, including other components, can be passed as props.
+
+    ```jsx
+    const header = <Header title="Welcome" />;
+    <PageLayout header={header} />
+    ```
+
+6. **Callback Functions:**
+   - You can pass callback functions as props to allow child components to communicate with the parent component.
+
+    ```jsx
+    // ParentComponent.js
+    const ParentComponent = ({ onChildClick }) => (
+      <ChildComponent onClick={onChildClick} />
+    );
+
+    // ChildComponent.js
+    const ChildComponent = ({ onClick }) => (
+      <button onClick={() => onClick('Button clicked!')}>Click me</button>
+    );
+    ```
+
+7. **Event Handlers:**
+   - Event handlers, such as functions to handle button clicks or form submissions, can be passed as props.
+
+    ```jsx
+    const handleButtonClick = () => {
+      console.log('Button clicked!');
+    };
+
+    <Button onClick={handleButtonClick} />
+    ```
+
+8. **Conditional Values:**
+   - You can pass boolean or conditional values to control the behavior of child components.
+
+    ```jsx
+    <ConditionalComponent showContent={true} />
+    ```
+
+These examples illustrate the flexibility of props in React. Props enable you to create dynamic and reusable components by allowing them to receive and use external data and behavior from their parent components.
+
+# What is the use of props?
+Props, short for "properties," play a crucial role in React and are essential for building dynamic and reusable components. The main uses of props in React include:
+
+1. **Passing Data:**
+   - Props are primarily used for passing data from a parent component to a child component. This allows you to make your components dynamic by providing them with the information they need to render and behave in different ways.
+
+    ```jsx
+    // Parent Component
+    const App = () => {
+      const message = "Hello from props!";
+      return <ChildComponent greeting={message} />;
+    };
+
+    // Child Component
+    const ChildComponent = (props) => {
+      return <p>{props.greeting}</p>;
+    };
+    ```
+
+2. **Component Configuration:**
+   - Props enable you to configure a child component's behavior by passing various values, such as styles, classNames, or conditional flags.
+
+    ```jsx
+    // Parent Component
+    const App = () => {
+      const style = { color: 'blue', fontSize: '16px' };
+      return <StyledComponent style={style} />;
+    };
+
+    // Child Component
+    const StyledComponent = (props) => {
+      return <div style={props.style}>Stylish content</div>;
+    };
+    ```
+
+3. **Dynamic Rendering:**
+   - Props allow you to conditionally render different content or apply different styles based on the data received from the parent component.
+
+    ```jsx
+    // Parent Component
+    const App = () => {
+      const isLoggedIn = true;
+      return <Greeting isLoggedIn={isLoggedIn} />;
+    };
+
+    // Child Component
+    const Greeting = (props) => {
+      return (
+        <div>
+          {props.isLoggedIn ? <p>Welcome, User!</p> : <p>Please log in</p>}
+        </div>
+      );
+    };
+    ```
+
+4. **Event Handling:**
+   - Props are used to pass callback functions and event handlers from a parent component to a child component, allowing child components to communicate with the parent or trigger specific actions.
+
+    ```jsx
+    // Parent Component
+    const App = () => {
+      const handleClick = () => {
+        console.log('Button clicked!');
+      };
+
+      return <Button onClick={handleClick} />;
+    };
+
+    // Child Component
+    const Button = (props) => {
+      return <button onClick={props.onClick}>Click me</button>;
+    };
+    ```
+
+5. **Data Flow:**
+   - Props establish a unidirectional data flow in React, where data flows from parent components down to their children. This makes it easier to reason about the application's state and helps maintain a clear and predictable data flow.
+
+6. **Reusability:**
+   - Props promote component reusability by allowing components to be easily configured and adapted for different use cases. This contributes to a modular and maintainable codebase.
+
+In summary, props are a fundamental concept in React that facilitates the communication of data and behavior between components. They enable the creation of flexible, dynamic, and reusable components, contributing to the declarative and efficient nature of React applications.
