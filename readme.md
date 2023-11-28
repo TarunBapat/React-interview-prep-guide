@@ -1,4 +1,4 @@
-What would happen if we directly run JSX in Browser?
+- What would happen if we directly run JSX in Browser?
 
 If you try to directly run JSX (JavaScript XML) in a web browser, it will typically result in an error. JSX is a syntax extension for JavaScript often used with libraries like React. JSX code needs to be transpiled into regular JavaScript code before it can be executed in a web browser.
 
@@ -666,3 +666,49 @@ In the example above:
 HOCs are a powerful way to share and reuse component logic in your application. They can help keep your components more focused on their primary functionality and promote the DRY (Don't Repeat Yourself) principle. However, it's essential to be cautious when using HOCs to avoid issues like prop drilling and overly complex component hierarchies. Additionally, consider using React hooks, such as `useEffect` and `useState`, for simpler state management in functional components, as they can often replace the need for some HOCs.
 
 example code : https://codesandbox.io/s/friendly-estrela-dvhxr2?file=/src/Demo.js
+
+
+# What are the lifecycle methods of class components and in which order are they
+called?
+In React, class components have several lifecycle methods that allow you to perform actions at different stages of the component's life. These methods can be categorized into three phases: mounting, updating, and unmounting. Here's the order in which they are called:
+
+Mounting Phase:
+constructor(props):
+
+This is called when an instance of the component is being created and initialized. It's the first method called during the mounting phase.
+static getDerivedStateFromProps(props, state):
+
+This method is called right before rendering the component. It allows the component to update its state based on changes in props.
+render():
+
+The render method is responsible for returning the JSX that represents the component's UI.
+componentDidMount():
+
+This method is called after the component has been rendered to the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
+Updating Phase:
+static getDerivedStateFromProps(nextProps, nextState):
+
+Similar to the mounting phase, this method is called before rendering when new props or state are received. It allows the component to update its state based on changes in props.
+shouldComponentUpdate(nextProps, nextState):
+
+This method is called before rendering when new props or state are received. It determines whether the component should re-render or not. By default, it returns true, but you can implement custom logic to optimize rendering.
+render():
+
+The render method is called again to re-render the component if shouldComponentUpdate returns true.
+getSnapshotBeforeUpdate(prevProps, prevState):
+
+This method is called right before the changes from the virtual DOM are reflected in the actual DOM. It receives the previous props and state, and its return value will be passed as the third parameter to the next method.
+componentDidUpdate(prevProps, prevState, snapshot):
+
+This method is called after the component has been updated and the changes are reflected in the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
+Unmounting Phase:
+componentWillUnmount():
+This method is called just before the component is removed from the DOM. It is used for cleanup tasks like cancelling network requests, clearing up subscriptions, etc.
+Error Handling:
+static getDerivedStateFromError(error):
+
+This method is called when there is an error during rendering, allowing the component to catch the error and update its state accordingly.
+componentDidCatch(error, info):
+
+This method is called after an error has been thrown during rendering. It's used for logging and reporting errors.
+It's important to note that with the introduction of React Hooks in React 16.8, functional components now have access to similar lifecycle methods and stateful logic using hooks like useEffect and useState.
