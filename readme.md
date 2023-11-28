@@ -1,4 +1,4 @@
-- What would happen if we directly run JSX in Browser?
+# What would happen if we directly run JSX in Browser?
 
 If you try to directly run JSX (JavaScript XML) in a web browser, it will typically result in an error. JSX is a syntax extension for JavaScript often used with libraries like React. JSX code needs to be transpiled into regular JavaScript code before it can be executed in a web browser.
 
@@ -93,7 +93,7 @@ What are hooks?
 In React, hooks are functions that allow you to "hook into" React state and lifecycle features from functional components. They were introduced in React 16.8 to provide a more expressive and flexible way to work with state and side effects in functional components, eliminating the need to use class components for managing state.
 
 
-What is Context?
+# What is Context?
 Creating a context using functional components in React involves using the `createContext` function to define a context and then using the `useContext` hook to consume that context. Here's an example of how to create and use a context in a functional component:
 
 1. First, let's define a context in a separate file, typically called `MyContext.js`:
@@ -164,7 +164,7 @@ In this example, the `MyComponent` uses the `useMyContext` hook to access the da
 By using this approach, you can efficiently manage and share data across multiple components in your React application using functional components and context.
 
 
-When is it important to pass props to super(), and why?
+# When is it important to pass props to super(), and why?
 In React, when you create a class component by extending `React.Component`, it's important to pass `props` to the `super()` constructor inside your component's constructor function. This is necessary to ensure that your component properly initializes and sets up the `this.props` property for your component instance.
 
 Here's why it's important to pass `props` to `super()`:
@@ -215,7 +215,7 @@ In summary, passing `props` to `super(props)` in the constructor is crucial for 
 
 
 
-How to apply validation on Props in ReactJS?
+# How to apply validation on Props in ReactJS?
 In React, you can apply validation on props by defining the PropTypes for your components. PropTypes are a way to specify the expected types and, optionally, whether a prop is required. By using PropTypes, you can catch potential issues with props at runtime, making it easier to maintain and debug your application.
 
 Here's how to apply prop validation in React using PropTypes:
@@ -261,7 +261,7 @@ By applying prop validation using PropTypes, you can catch potential errors earl
 
 
 
-What is StrictMode in React?
+# What is StrictMode in React?
 React's Strict Mode is a development mode tool that highlights potential problems in your application. It's not meant for use in production but is a useful feature for identifying and addressing common issues and pitfalls early in the development process.
 
 When you wrap your application or a part of it in a `<React.StrictMode>` component, React performs several checks and provides additional warnings and features to help you identify problems in your code. Some of the benefits of using Strict Mode include:
@@ -296,7 +296,7 @@ ReactDOM.render(
 Remember that Strict Mode is only intended for use during development, as it can slow down your application and may affect certain third-party libraries that are not Strict Mode compatible. However, it's a valuable tool for identifying and addressing potential issues and improving the overall quality of your React application during development. When you're ready to deploy your application in a production environment, you can remove or comment out the `<React.StrictMode>` wrapper.
 
 
-What is unidirectional data flow? react
+# What is unidirectional data flow? react
 Unidirectional data flow is a fundamental concept in React and many other modern UI frameworks. It refers to the practice of controlling and managing the flow of data in an application in one direction, which is typically from the parent components to child components. This approach ensures that the data flow in your application is predictable, which leads to more maintainable and less error-prone code.
 
 In React, unidirectional data flow means that data is passed down from parent components to child components through a hierarchy of components. When a piece of data changes, it is generally updated at the top of the component hierarchy (often within a parent or container component), and the updated data is then passed down as props to child components. Child components can't directly modify the data in their parent components; they can only communicate changes by triggering callbacks passed down as props.
@@ -327,7 +327,7 @@ Unidirectional data flow is a core concept in React and is facilitated by the us
 
 
 
- What is the difference between Element and Component?
+# What is the difference between Element and Component?
  In React, "Element" and "Component" are two fundamental concepts, and understanding the difference between them is crucial for building React applications.
 
 1. **Element**:
@@ -366,7 +366,7 @@ Components can use elements within their render methods and may also contain oth
 
 
 
-Where in a React component should you make an AJAX request?
+# Where in a React component should you make an AJAX request?
 In a React component, you should generally make AJAX requests (or any kind of asynchronous data fetching) in one of the component's lifecycle methods. The most common places to make AJAX requests in a React component are:
 
 1. `componentDidMount`: This is one of the most common lifecycle methods to use for making AJAX requests. It is called immediately after a component is inserted into the DOM. This is a good place to initiate network requests because it ensures that the component has been rendered on the page.
@@ -416,7 +416,7 @@ Also, remember to handle errors and loading states appropriately and to clean up
 
 
 
-What are portals in React?
+# What are portals in React?
 Portals in React are a feature that allows you to render a component's content (or an entire component) at a different place in the DOM hierarchy than its parent. This can be particularly useful when you need to render content outside the normal hierarchy of your components, such as modals, tooltips, dropdowns, or any component that should "pop out" of its containing elements.
 
 The primary use case for portals is to render content in a different DOM element, typically one that's not a direct parent or ancestor of the component initiating the portal. To create a portal, you use the `ReactDOM.createPortal()` method. Here's a basic example:
@@ -497,7 +497,7 @@ It's important to note that when using the callback function, you should not dir
 Callback functions with `setState()` are commonly used when you need to perform side effects, make additional state updates, or trigger other operations that should happen after the state change has been applied.
 
 
-What are synthetic events in React?
+# What are synthetic events in React?
 In React, synthetic events are a cross-browser abstraction over native browser events. React's event system is designed to provide a consistent and predictable way to handle events across different web browsers. Instead of directly attaching event listeners to DOM elements, React uses a system of event delegation and synthetic events to handle events in a more efficient and unified way.
 
 Here are some key points about synthetic events in React:
@@ -531,7 +531,7 @@ React's synthetic events help you write cleaner and more maintainable event hand
 
 
 
-What are Pure Components? in react
+# What are Pure Components? in react
 Pure Components in React are a type of React component that are designed to optimize rendering performance. They are similar to regular class components, but they automatically implement the `shouldComponentUpdate` method with a shallow prop and state comparison. This means that a Pure Component will only re-render if the props or state change in a way that affects the component's output.
 
 The key characteristics of Pure Components are:
@@ -558,7 +558,7 @@ It's important to note that Pure Components should be used with caution. While t
 
 
 
-What are error boundaries? using functional components in react 
+# What are error boundaries? using functional components in react 
 In React, error boundaries can also be implemented with functional components. Starting from React 16.3, you can use the `useErrorBoundary` hook to create error boundaries for functional components. This allows you to capture and handle errors in functional components in a similar way as with class components.
 
 Here's an example of how to create an error boundary using a functional component:
@@ -615,7 +615,7 @@ Using the `useErrorBoundary` hook, which is not a built-in hook in React, you ca
 
 
 
-What are Higher Order Components(HOC)?explain with example for functional components
+# What are Higher Order Components(HOC)?explain with example for functional components
 Higher Order Components (HOCs) are a design pattern in React that allow you to reuse component logic. HOCs are not components themselves, but they are functions that take a component as an argument and return a new enhanced component. The purpose of HOCs is to abstract common behavior and share it among multiple components. They are often used for tasks such as state management, authentication, and data fetching.
 
 Here's an example of creating a Higher Order Component for functional components in React:
@@ -668,47 +668,49 @@ HOCs are a powerful way to share and reuse component logic in your application. 
 example code : https://codesandbox.io/s/friendly-estrela-dvhxr2?file=/src/Demo.js
 
 
-# What are the lifecycle methods of class components and in which order are they
-called?
+# What are the lifecycle methods of class components and in which order are they called?
 In React, class components have several lifecycle methods that allow you to perform actions at different stages of the component's life. These methods can be categorized into three phases: mounting, updating, and unmounting. Here's the order in which they are called:
 
-Mounting Phase:
-constructor(props):
-
+**Mounting Phase:**
+1. **constructor(props):**
 This is called when an instance of the component is being created and initialized. It's the first method called during the mounting phase.
-static getDerivedStateFromProps(props, state):
 
+2. **static getDerivedStateFromProps(props, state):**
 This method is called right before rendering the component. It allows the component to update its state based on changes in props.
-render():
 
+3. **render():**
 The render method is responsible for returning the JSX that represents the component's UI.
-componentDidMount():
 
+4. **componentDidMount():**
 This method is called after the component has been rendered to the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
-Updating Phase:
-static getDerivedStateFromProps(nextProps, nextState):
 
+**Updating Phase:**
+
+1. **static getDerivedStateFromProps(nextProps, nextState):**
 Similar to the mounting phase, this method is called before rendering when new props or state are received. It allows the component to update its state based on changes in props.
-shouldComponentUpdate(nextProps, nextState):
 
+2. **shouldComponentUpdate(nextProps, nextState):**
 This method is called before rendering when new props or state are received. It determines whether the component should re-render or not. By default, it returns true, but you can implement custom logic to optimize rendering.
-render():
 
+3. **render():**
 The render method is called again to re-render the component if shouldComponentUpdate returns true.
-getSnapshotBeforeUpdate(prevProps, prevState):
 
+4. **getSnapshotBeforeUpdate(prevProps, prevState):**
 This method is called right before the changes from the virtual DOM are reflected in the actual DOM. It receives the previous props and state, and its return value will be passed as the third parameter to the next method.
-componentDidUpdate(prevProps, prevState, snapshot):
 
+5. **componentDidUpdate(prevProps, prevState, snapshot):**
 This method is called after the component has been updated and the changes are reflected in the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
-Unmounting Phase:
-componentWillUnmount():
+
+**Unmounting Phase:**
+
+1. **componentWillUnmount():**
 This method is called just before the component is removed from the DOM. It is used for cleanup tasks like cancelling network requests, clearing up subscriptions, etc.
-Error Handling:
-static getDerivedStateFromError(error):
 
+**Error Handling:**
+
+1. **static getDerivedStateFromError(error):**
 This method is called when there is an error during rendering, allowing the component to catch the error and update its state accordingly.
-componentDidCatch(error, info):
 
+1. **componentDidCatch(error, info):**
 This method is called after an error has been thrown during rendering. It's used for logging and reporting errors.
 It's important to note that with the introduction of React Hooks in React 16.8, functional components now have access to similar lifecycle methods and stateful logic using hooks like useEffect and useState.
