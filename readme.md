@@ -23,20 +23,21 @@ For example, you might have an `index.jsx` file with JSX code, which is transpil
 ```html
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <!-- other head elements -->
-</head>
-<body>
+  </head>
+  <body>
     <div id="root"></div>
-    <script src="index.js"></script> <!-- Include the transpiled JavaScript -->
-</body>
+    <script src="index.js"></script>
+    <!-- Include the transpiled JavaScript -->
+  </body>
 </html>
 ```
 
 By following these steps, your JSX code will work as intended in the web browser, and the resulting user interface will be rendered as expected.
 
+# Does React Hook work with static typing?
 
-Does React Hook work with static typing?
 Yes, React Hooks can work effectively with static typing in TypeScript. TypeScript is a statically typed superset of JavaScript, and it's often used with React to provide type safety and improve code quality. React Hooks, introduced in React 16.8, are compatible with TypeScript, and you can use TypeScript to provide type annotations and interfaces for your components and hooks.
 
 Here's how you can use React Hooks with static typing in TypeScript:
@@ -92,21 +93,21 @@ By using TypeScript with React Hooks, you can catch type-related errors at compi
 What are hooks?
 In React, hooks are functions that allow you to "hook into" React state and lifecycle features from functional components. They were introduced in React 16.8 to provide a more expressive and flexible way to work with state and side effects in functional components, eliminating the need to use class components for managing state.
 
-
 # What is Context?
+
 Creating a context using functional components in React involves using the `createContext` function to define a context and then using the `useContext` hook to consume that context. Here's an example of how to create and use a context in a functional component:
 
 1. First, let's define a context in a separate file, typically called `MyContext.js`:
 
 ```jsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 // Create the context
 const MyContext = createContext();
 
 // Create a custom provider component
 export function MyContextProvider({ children }) {
-  const [data, setData] = useState('Initial data');
+  const [data, setData] = useState("Initial data");
 
   return (
     <MyContext.Provider value={{ data, setData }}>
@@ -126,24 +127,24 @@ In this example, we've created a context called `MyContext`, a provider componen
 2. In your main application file, wrap your entire application with the `MyContextProvider`:
 
 ```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { MyContextProvider } from './MyContext';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { MyContextProvider } from "./MyContext";
+import App from "./App";
 
 ReactDOM.render(
   <MyContextProvider>
     <App />
   </MyContextProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 ```
 
 3. Now, in any functional component where you want to access the context data, you can use the `useMyContext` hook:
 
 ```jsx
-import React from 'react';
-import { useMyContext } from './MyContext';
+import React from "react";
+import { useMyContext } from "./MyContext";
 
 function MyComponent() {
   const { data, setData } = useMyContext();
@@ -151,7 +152,7 @@ function MyComponent() {
   return (
     <div>
       <p>Data from context: {data}</p>
-      <button onClick={() => setData('Updated data')}>Update Data</button>
+      <button onClick={() => setData("Updated data")}>Update Data</button>
     </div>
   );
 }
@@ -163,8 +164,8 @@ In this example, the `MyComponent` uses the `useMyContext` hook to access the da
 
 By using this approach, you can efficiently manage and share data across multiple components in your React application using functional components and context.
 
-
 # When is it important to pass props to super(), and why?
+
 In React, when you create a class component by extending `React.Component`, it's important to pass `props` to the `super()` constructor inside your component's constructor function. This is necessary to ensure that your component properly initializes and sets up the `this.props` property for your component instance.
 
 Here's why it's important to pass `props` to `super()`:
@@ -213,9 +214,8 @@ class MyComponent extends React.Component {
 
 In summary, passing `props` to `super(props)` in the constructor is crucial for correctly initializing your React class components and ensuring that `this.props` is available throughout the component. Failing to do so will result in errors and unexpected behavior when trying to access and use `props` in your component.
 
-
-
 # How to apply validation on Props in ReactJS?
+
 In React, you can apply validation on props by defining the PropTypes for your components. PropTypes are a way to specify the expected types and, optionally, whether a prop is required. By using PropTypes, you can catch potential issues with props at runtime, making it easier to maintain and debug your application.
 
 Here's how to apply prop validation in React using PropTypes:
@@ -229,7 +229,7 @@ Here's how to apply prop validation in React using PropTypes:
 2. Import `PropTypes` from the `prop-types` package in your component file:
 
    ```jsx
-   import PropTypes from 'prop-types';
+   import PropTypes from "prop-types";
    ```
 
 3. Define the PropTypes for your component by creating a `propTypes` object as a static property of your component class. You can specify the expected type and, if necessary, whether the prop is required:
@@ -259,9 +259,8 @@ Here's how to apply prop validation in React using PropTypes:
 
 By applying prop validation using PropTypes, you can catch potential errors early in the development process and make your components more robust and maintainable. It's particularly helpful when working on large projects or with a team of developers to ensure that props are being passed correctly to your components.
 
-
-
 # What is StrictMode in React?
+
 React's Strict Mode is a development mode tool that highlights potential problems in your application. It's not meant for use in production but is a useful feature for identifying and addressing common issues and pitfalls early in the development process.
 
 When you wrap your application or a part of it in a `<React.StrictMode>` component, React performs several checks and provides additional warnings and features to help you identify problems in your code. Some of the benefits of using Strict Mode include:
@@ -281,22 +280,22 @@ When you wrap your application or a part of it in a `<React.StrictMode>` compone
 To use React Strict Mode, you can wrap your entire application or specific parts of it within a `<React.StrictMode>` component in your top-level component (usually in your `index.js` or `App.js` file):
 
 ```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 ```
 
 Remember that Strict Mode is only intended for use during development, as it can slow down your application and may affect certain third-party libraries that are not Strict Mode compatible. However, it's a valuable tool for identifying and addressing potential issues and improving the overall quality of your React application during development. When you're ready to deploy your application in a production environment, you can remove or comment out the `<React.StrictMode>` wrapper.
 
-
 # What is unidirectional data flow? react
+
 Unidirectional data flow is a fundamental concept in React and many other modern UI frameworks. It refers to the practice of controlling and managing the flow of data in an application in one direction, which is typically from the parent components to child components. This approach ensures that the data flow in your application is predictable, which leads to more maintainable and less error-prone code.
 
 In React, unidirectional data flow means that data is passed down from parent components to child components through a hierarchy of components. When a piece of data changes, it is generally updated at the top of the component hierarchy (often within a parent or container component), and the updated data is then passed down as props to child components. Child components can't directly modify the data in their parent components; they can only communicate changes by triggering callbacks passed down as props.
@@ -323,12 +322,9 @@ Advantages of unidirectional data flow in React:
 
 Unidirectional data flow is a core concept in React and is facilitated by the use of props, state, and the virtual DOM. By adhering to this pattern, React provides a structured and efficient way to build user interfaces that are easy to understand, maintain, and scale.
 
-
-
-
-
 # What is the difference between Element and Component?
- In React, "Element" and "Component" are two fundamental concepts, and understanding the difference between them is crucial for building React applications.
+
+In React, "Element" and "Component" are two fundamental concepts, and understanding the difference between them is crucial for building React applications.
 
 1. **Element**:
 
@@ -364,9 +360,8 @@ In summary, the key difference is that elements are simple objects describing th
 
 Components can use elements within their render methods and may also contain other components. This composability is a central feature of React, allowing you to create and manage large and complex user interfaces in a structured and modular way.
 
-
-
 # Where in a React component should you make an AJAX request?
+
 In a React component, you should generally make AJAX requests (or any kind of asynchronous data fetching) in one of the component's lifecycle methods. The most common places to make AJAX requests in a React component are:
 
 1. `componentDidMount`: This is one of the most common lifecycle methods to use for making AJAX requests. It is called immediately after a component is inserted into the DOM. This is a good place to initiate network requests because it ensures that the component has been rendered on the page.
@@ -402,9 +397,7 @@ class MyComponent extends React.Component {
   }
 
   render() {
-    return (
-      <button onClick={this.fetchData}>Fetch Data</button>
-    );
+    return <button onClick={this.fetchData}>Fetch Data</button>;
   }
 }
 ```
@@ -413,23 +406,21 @@ It's important to note that React's upcoming concurrent mode may introduce new p
 
 Also, remember to handle errors and loading states appropriately and to clean up any resources, such as canceling pending requests, when the component is unmounted to prevent memory leaks.
 
-
-
-
 # What are portals in React?
+
 Portals in React are a feature that allows you to render a component's content (or an entire component) at a different place in the DOM hierarchy than its parent. This can be particularly useful when you need to render content outside the normal hierarchy of your components, such as modals, tooltips, dropdowns, or any component that should "pop out" of its containing elements.
 
 The primary use case for portals is to render content in a different DOM element, typically one that's not a direct parent or ancestor of the component initiating the portal. To create a portal, you use the `ReactDOM.createPortal()` method. Here's a basic example:
 
 ```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 class MyPortalComponent extends React.Component {
   render() {
     return ReactDOM.createPortal(
       this.props.children,
-      document.getElementById('portal-root') // The DOM element where the content will be rendered
+      document.getElementById("portal-root") // The DOM element where the content will be rendered
     );
   }
 }
@@ -448,13 +439,12 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
 In the above example, the content wrapped in the `MyPortalComponent` will be rendered inside the element with the id "portal-root," which can be anywhere in the DOM hierarchy. This allows you to separate the rendering location from the component structure, making it easier to manage components like modals that should overlay the rest of the UI.
 
 Portals provide a way to work around the normal constraints of the React component tree and can be particularly useful for cases where you need to render content above everything else or in a different part of the document. However, use portals judiciously, as they can make your code more complex and harder to understand if not used carefully.
-
 
 What is the purpose of the callback function as an argument of setState()?
 In React, the `setState()` function is used to update the state of a component. It's important to understand that `setState()` is asynchronous, which means that React may batch multiple state updates together for performance reasons. Because of this asynchronicity, React provides a way to pass a callback function as an argument to `setState()`, which is executed after the state has been updated. The primary purpose of the callback function is to perform additional operations that rely on the updated state or to ensure that some code runs after the state update is complete.
@@ -471,12 +461,9 @@ class MyComponent extends React.Component {
   }
 
   incrementCount() {
-    this.setState(
-      { count: this.state.count + 1 },
-      () => {
-        console.log('State has been updated:', this.state.count);
-      }
-    );
+    this.setState({ count: this.state.count + 1 }, () => {
+      console.log("State has been updated:", this.state.count);
+    });
   }
 
   render() {
@@ -496,8 +483,8 @@ It's important to note that when using the callback function, you should not dir
 
 Callback functions with `setState()` are commonly used when you need to perform side effects, make additional state updates, or trigger other operations that should happen after the state change has been applied.
 
-
 # What are synthetic events in React?
+
 In React, synthetic events are a cross-browser abstraction over native browser events. React's event system is designed to provide a consistent and predictable way to handle events across different web browsers. Instead of directly attaching event listeners to DOM elements, React uses a system of event delegation and synthetic events to handle events in a more efficient and unified way.
 
 Here are some key points about synthetic events in React:
@@ -515,8 +502,8 @@ Here's an example of how you can use synthetic events in React:
 ```jsx
 class MyComponent extends React.Component {
   handleClick = (event) => {
-    console.log('Button clicked');
-    console.log('Event type:', event.type);
+    console.log("Button clicked");
+    console.log("Event type:", event.type);
   };
 
   render() {
@@ -529,9 +516,8 @@ In the example above, the `onClick` event handler receives a synthetic event as 
 
 React's synthetic events help you write cleaner and more maintainable event handling code, reduce the risk of browser-specific issues, and take advantage of the performance optimizations React provides, such as event pooling and event delegation.
 
-
-
 # What are Pure Components? in react
+
 Pure Components in React are a type of React component that are designed to optimize rendering performance. They are similar to regular class components, but they automatically implement the `shouldComponentUpdate` method with a shallow prop and state comparison. This means that a Pure Component will only re-render if the props or state change in a way that affects the component's output.
 
 The key characteristics of Pure Components are:
@@ -543,7 +529,7 @@ The key characteristics of Pure Components are:
 Here's an example of a Pure Component:
 
 ```jsx
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from "react";
 
 class MyPureComponent extends PureComponent {
   render() {
@@ -556,15 +542,14 @@ By extending `PureComponent` instead of the regular `Component`, you ensure that
 
 It's important to note that Pure Components should be used with caution. While they can help improve performance in some cases, they are not a silver bullet and may not be suitable for all scenarios. When using Pure Components, make sure your props and state are immutable or use immutable data structures like Immutable.js or libraries like Immer to handle updates. Additionally, be aware that the shallow comparison performed by Pure Components may not work correctly when dealing with deeply nested data structures or complex objects, in which case you might need to implement your custom `shouldComponentUpdate` logic.
 
+# What are error boundaries? using functional components in react
 
-
-# What are error boundaries? using functional components in react 
 In React, error boundaries can also be implemented with functional components. Starting from React 16.3, you can use the `useErrorBoundary` hook to create error boundaries for functional components. This allows you to capture and handle errors in functional components in a similar way as with class components.
 
 Here's an example of how to create an error boundary using a functional component:
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -593,7 +578,10 @@ function ErrorBoundaryExample() {
   return (
     <div>
       <h1>Error Boundary Example</h1>
-      <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => setError(null)}>
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onReset={() => setError(null)}
+      >
         <SomeComponentThatMightThrowErrors />
       </ErrorBoundary>
     </div>
@@ -613,15 +601,14 @@ In this example:
 
 Using the `useErrorBoundary` hook, which is not a built-in hook in React, you can create custom error boundaries that suit your application's needs. This hook is not provided by React out-of-the-box, so you would typically implement it or use a library that offers this functionality. Popular error boundary libraries include `react-error-boundary` and `react-error-boundary` which provide pre-built components and hooks for creating error boundaries in functional components.
 
-
-
 # What are Higher Order Components(HOC)?explain with example for functional components
+
 Higher Order Components (HOCs) are a design pattern in React that allow you to reuse component logic. HOCs are not components themselves, but they are functions that take a component as an argument and return a new enhanced component. The purpose of HOCs is to abstract common behavior and share it among multiple components. They are often used for tasks such as state management, authentication, and data fetching.
 
 Here's an example of creating a Higher Order Component for functional components in React:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // A simple HOC that adds a "loading" state to a component
 function withLoading(Component) {
@@ -667,80 +654,75 @@ HOCs are a powerful way to share and reuse component logic in your application. 
 
 example code : https://codesandbox.io/s/friendly-estrela-dvhxr2?file=/src/Demo.js
 
-
 # What are the lifecycle methods of class components and in which order are they called?
+
 In React, class components have several lifecycle methods that allow you to perform actions at different stages of the component's life. These methods can be categorized into three phases: mounting, updating, and unmounting. Here's the order in which they are called:
 
 **Mounting Phase:**
+
 1. **constructor(props):**
-This is called when an instance of the component is being created and initialized. It's the first method called during the mounting phase.
+   This is called when an instance of the component is being created and initialized. It's the first method called during the mounting phase.
 
 2. **static getDerivedStateFromProps(props, state):**
-This method is called right before rendering the component. It allows the component to update its state based on changes in props.
+   This method is called right before rendering the component. It allows the component to update its state based on changes in props.
 
 3. **render():**
-The render method is responsible for returning the JSX that represents the component's UI.
+   The render method is responsible for returning the JSX that represents the component's UI.
 
 4. **componentDidMount():**
-This method is called after the component has been rendered to the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
+   This method is called after the component has been rendered to the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
 
 **Updating Phase:**
 
 1. **static getDerivedStateFromProps(nextProps, nextState):**
-Similar to the mounting phase, this method is called before rendering when new props or state are received. It allows the component to update its state based on changes in props.
+   Similar to the mounting phase, this method is called before rendering when new props or state are received. It allows the component to update its state based on changes in props.
 
 2. **shouldComponentUpdate(nextProps, nextState):**
-This method is called before rendering when new props or state are received. It determines whether the component should re-render or not. By default, it returns true, but you can implement custom logic to optimize rendering.
+   This method is called before rendering when new props or state are received. It determines whether the component should re-render or not. By default, it returns true, but you can implement custom logic to optimize rendering.
 
 3. **render():**
-The render method is called again to re-render the component if shouldComponentUpdate returns true.
+   The render method is called again to re-render the component if shouldComponentUpdate returns true.
 
 4. **getSnapshotBeforeUpdate(prevProps, prevState):**
-This method is called right before the changes from the virtual DOM are reflected in the actual DOM. It receives the previous props and state, and its return value will be passed as the third parameter to the next method.
+   This method is called right before the changes from the virtual DOM are reflected in the actual DOM. It receives the previous props and state, and its return value will be passed as the third parameter to the next method.
 
 5. **componentDidUpdate(prevProps, prevState, snapshot):**
-This method is called after the component has been updated and the changes are reflected in the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
+   This method is called after the component has been updated and the changes are reflected in the DOM. It's often used for actions that require interaction with the DOM or external data fetching.
 
 **Unmounting Phase:**
 
 1. **componentWillUnmount():**
-This method is called just before the component is removed from the DOM. It is used for cleanup tasks like cancelling network requests, clearing up subscriptions, etc.
+   This method is called just before the component is removed from the DOM. It is used for cleanup tasks like cancelling network requests, clearing up subscriptions, etc.
 
 **Error Handling:**
 
 1. **static getDerivedStateFromError(error):**
-This method is called when there is an error during rendering, allowing the component to catch the error and update its state accordingly.
+   This method is called when there is an error during rendering, allowing the component to catch the error and update its state accordingly.
 
 1. **componentDidCatch(error, info):**
-This method is called after an error has been thrown during rendering. It's used for logging and reporting errors.
-It's important to note that with the introduction of React Hooks in React 16.8, functional components now have access to similar lifecycle methods and stateful logic using hooks like useEffect and useState.
+   This method is called after an error has been thrown during rendering. It's used for logging and reporting errors.
+   It's important to note that with the introduction of React Hooks in React 16.8, functional components now have access to similar lifecycle methods and stateful logic using hooks like useEffect and useState.
 
 # What is PropDrilling? And how can we avoid it?
+
 Prop drilling, also known as "threading props" or "component composition," occurs when you pass down props through multiple layers of components, and some intermediary components do not actually use those props but are required to pass them along to their child components. This can make the code less maintainable and harder to understand.
 
 Consider the following example:
 
 ```jsx
 // Grandparent Component
-const Grandparent = ({ data }) => (
-  <Parent data={data} />
-);
+const Grandparent = ({ data }) => <Parent data={data} />;
 
 // Parent Component
-const Parent = ({ data }) => (
-  <Child data={data} />
-);
+const Parent = ({ data }) => <Child data={data} />;
 
 // Child Component
-const Child = ({ data }) => (
-  <Grandchild data={data} />
-);
+const Child = ({ data }) => <Grandchild data={data} />;
 
 // Grandchild Component
-const Grandchild = ({ data }) => (
-  <div>{data}</div>
-);
+const Grandchild = ({ data }) => <div>{data}</div>;
 ```
+
 In this example, the Grandparent component receives the data prop but doesn't use it. It simply passes it down to the Parent component, which, in turn, passes it down to the Child component, and finally, it reaches the Grandchild component where it is used. This is prop drilling.
 
 To avoid prop drilling and make the code more maintainable, you can use techniques like:
@@ -761,17 +743,14 @@ const Grandparent = ({ data }) => (
 );
 
 // Child Component
-const Child = () => (
-  <Grandchild />
-);
+const Child = () => <Grandchild />;
 
 // Grandchild Component
 const Grandchild = () => (
-  <DataContext.Consumer>
-    {data => <div>{data}</div>}
-  </DataContext.Consumer>
+  <DataContext.Consumer>{(data) => <div>{data}</div>}</DataContext.Consumer>
 );
 ```
+
 **Redux or State Management:**
 Using a state management library like Redux can centralize the state of your application, making it accessible to any component without the need for prop drilling.
 
@@ -787,12 +766,12 @@ useMemo and useCallback are both React Hooks designed to optimize performance by
 useMemo is used to memoize the result of a computation. It takes a function and an array of dependencies. The function will only be recomputed when one of the dependencies has changed.
 
 ```jsx
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 
 const MyComponent = ({ data }) => {
   const expensiveComputation = useMemo(() => {
     // Perform some expensive computation based on data
-    return data.map(item => item * 2);
+    return data.map((item) => item * 2);
   }, [data]);
 
   return (
@@ -803,13 +782,14 @@ const MyComponent = ({ data }) => {
   );
 };
 ```
+
 In this example, expensiveComputation will only be recomputed when the data prop changes.
 
 **useCallback:**
 useCallback is used to memoize functions, especially useful when passing functions to child components to prevent unnecessary re-renders. It takes a function and an array of dependencies, and it returns a memoized version of the function.
 
 ```jsx
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from "react";
 
 const ParentComponent = () => {
   const [count, setCount] = useState(0);
@@ -819,17 +799,14 @@ const ParentComponent = () => {
     setCount(count + 1);
   }, [count]);
 
-  return (
-    <ChildComponent onClick={handleClick} />
-  );
+  return <ChildComponent onClick={handleClick} />;
 };
 
 const ChildComponent = ({ onClick }) => {
-  return (
-    <button onClick={onClick}>Click me</button>
-  );
+  return <button onClick={onClick}>Click me</button>;
 };
 ```
+
 In this example, handleClick will only be recreated if the count state changes. Without useCallback, a new function would be created on each render, causing unnecessary re-renders of the ChildComponent.
 
 **In summary:**
@@ -838,6 +815,7 @@ Use useMemo when you want to memoize the result of a computation.
 Use useCallback when you want to memoize a function, especially when passing it as a prop to child components.
 
 # What are controlled and uncontrolled components?
+
 Controlled and uncontrolled components are terms used in the context of form elements in React. They describe how the state of a form element is managed in a React component.
 
 **Controlled Components:**
@@ -861,6 +839,7 @@ const ControlledComponent = () => {
   );
 };
 ```
+
 In this example, the input value is controlled by the inputValue state, and the handleChange function updates the state whenever the input changes.
 
 **Uncontrolled Components:**
@@ -888,6 +867,7 @@ const UncontrolledComponent = () => {
   );
 };
 ```
+
 In this example, the input value is not controlled by React state. Instead, it is accessed directly from the DOM using the ref attribute.
 
 **Choosing Between Controlled and Uncontrolled Components:**
@@ -897,8 +877,8 @@ Uncontrolled components might be useful in certain situations, especially when i
 
 The choice between controlled and uncontrolled components depends on the specific requirements and use case of your application. Controlled components are more idiomatic in React and align with the React philosophy of declarative UI and single source of truth.
 
-
 # What is Lifting state up in React?
+
 Lifting state up is a pattern in React where you move the state of a component higher up in the component hierarchy to make it accessible to multiple child components. This pattern is used when multiple components need to share and synchronize the same state.
 
 The primary motivation for lifting state up is to ensure that the state is maintained in a common ancestor, allowing different components to read from and update that shared state. This promotes a single source of truth and avoids the need to pass state through multiple layers of components via props (prop drilling).
@@ -906,7 +886,7 @@ The primary motivation for lifting state up is to ensure that the state is maint
 Here's a simple example to illustrate the concept of lifting state up:
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // Child Component
 const ChildComponent = ({ count, onIncrement }) => (
@@ -952,6 +932,7 @@ In this example:
 By lifting the state up to the common ancestor (`ParentComponent`), both the parent and child components have access to the same state. This pattern is particularly useful when you have multiple components that need to share and modify the same data. It helps in avoiding prop drilling and makes the code more maintainable and scalable.
 
 # What is the state and why do we use it?
+
 In React, "state" refers to an object that represents the current condition or data of a component. It is used to manage and store dynamic data that can change over time in response to user actions, server responses, or other sources of data.
 
 In class components, you can define and manage state using the `this.state` object, while in functional components, you can use the `useState` hook to introduce state.
@@ -959,15 +940,19 @@ In class components, you can define and manage state using the `this.state` obje
 Here's a brief overview of the key aspects of state in React:
 
 1. **Dynamic Data:**
+
    - State is particularly useful when dealing with data that changes during the lifetime of a component. This could include user input, server responses, or any other form of dynamic data.
 
 2. **Reactivity:**
+
    - When the state of a component changes, React automatically triggers a re-render of the component, updating the user interface to reflect the new state. This reactivity is a core feature of React and allows for a more declarative style of programming.
 
 3. **Local to Component:**
+
    - Each component can have its own state, and changes to one component's state don't affect the state of other components. This encapsulation makes it easier to reason about and manage the state of individual components.
 
 4. **Initialization:**
+
    - State can be initialized with default values when a component is created. This provides an initial state for the component before any user interaction or data fetching occurs.
 
 5. **Updating State:**
@@ -976,7 +961,7 @@ Here's a brief overview of the key aspects of state in React:
 Here's a simple example using the `useState` hook in a functional component:
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Counter = () => {
   // Declare a state variable named 'count' with an initial value of 0
@@ -996,6 +981,7 @@ In this example, `count` is a piece of state that represents the current count. 
 Overall, state is a fundamental concept in React, enabling the creation of interactive and dynamic user interfaces by managing and reacting to changes in data over time.
 
 # Can we directly modify or update state?
+
 In React, it's important to follow the principle of immutability when working with state. Directly modifying or updating the state object is not allowed, as React relies on a process called reconciliation to determine what parts of the UI need to be updated. If the state object is mutated directly, React may not detect the changes properly, leading to unexpected behavior and bugs.
 
 Instead of modifying the state directly, React provides methods for updating state in a way that respects immutability. For class components, you use the `setState` method, and for functional components, you use the state updater function returned by the `useState` hook.
@@ -1034,7 +1020,7 @@ class Counter extends React.Component {
 In a functional component using the `useState` hook, you receive a state updater function that allows you to update the state based on its previous value.
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -1058,166 +1044,180 @@ const Counter = () => {
 
 By using the provided state updater functions (`setState` in class components, and the function returned by `useState` in functional components), you ensure that React is aware of state changes and can properly trigger component updates as needed. This approach helps maintain the integrity of React's virtual DOM and promotes predictable behavior in your application.
 
-
 # What can we pass in Props?
+
 In React, props (short for "properties") are a mechanism for passing data from a parent component to a child component. Props are a fundamental concept in React, and they are used to make components dynamic and reusable. You can pass various types of values as props to components. Here's what you can pass in props:
 
 1. **Primitives:**
+
    - You can pass primitive values such as strings, numbers, booleans, and null as props.
 
-    ```jsx
-    <ChildComponent text="Hello, props!" number={42} isActive={true} />
-    ```
+   ```jsx
+   <ChildComponent text="Hello, props!" number={42} isActive={true} />
+   ```
 
 2. **Functions:**
+
    - Functions can be passed as props, allowing child components to call functions defined in the parent component.
 
-    ```jsx
-    // ParentComponent.js
-    const ParentComponent = ({ handleClick }) => (
-      <ChildComponent onClick={handleClick} />
-    );
+   ```jsx
+   // ParentComponent.js
+   const ParentComponent = ({ handleClick }) => (
+     <ChildComponent onClick={handleClick} />
+   );
 
-    // ChildComponent.js
-    const ChildComponent = ({ onClick }) => (
-      <button onClick={onClick}>Click me</button>
-    );
-    ```
+   // ChildComponent.js
+   const ChildComponent = ({ onClick }) => (
+     <button onClick={onClick}>Click me</button>
+   );
+   ```
 
 3. **Objects:**
+
    - Objects can be passed as props, providing a way to send structured data to a child component.
 
-    ```jsx
-    const user = { name: 'John', age: 25 };
-    <UserProfile user={user} />
-    ```
+   ```jsx
+   const user = { name: "John", age: 25 };
+   <UserProfile user={user} />;
+   ```
 
 4. **Arrays:**
+
    - Arrays can be passed as props, allowing you to pass a collection of data to a child component.
 
-    ```jsx
-    const items = ['Apple', 'Banana', 'Orange'];
-    <ItemList items={items} />
-    ```
+   ```jsx
+   const items = ["Apple", "Banana", "Orange"];
+   <ItemList items={items} />;
+   ```
 
 5. **React Elements:**
+
    - React elements, including other components, can be passed as props.
 
-    ```jsx
-    const header = <Header title="Welcome" />;
-    <PageLayout header={header} />
-    ```
+   ```jsx
+   const header = <Header title="Welcome" />;
+   <PageLayout header={header} />;
+   ```
 
 6. **Callback Functions:**
+
    - You can pass callback functions as props to allow child components to communicate with the parent component.
 
-    ```jsx
-    // ParentComponent.js
-    const ParentComponent = ({ onChildClick }) => (
-      <ChildComponent onClick={onChildClick} />
-    );
+   ```jsx
+   // ParentComponent.js
+   const ParentComponent = ({ onChildClick }) => (
+     <ChildComponent onClick={onChildClick} />
+   );
 
-    // ChildComponent.js
-    const ChildComponent = ({ onClick }) => (
-      <button onClick={() => onClick('Button clicked!')}>Click me</button>
-    );
-    ```
+   // ChildComponent.js
+   const ChildComponent = ({ onClick }) => (
+     <button onClick={() => onClick("Button clicked!")}>Click me</button>
+   );
+   ```
 
 7. **Event Handlers:**
+
    - Event handlers, such as functions to handle button clicks or form submissions, can be passed as props.
 
-    ```jsx
-    const handleButtonClick = () => {
-      console.log('Button clicked!');
-    };
+   ```jsx
+   const handleButtonClick = () => {
+     console.log("Button clicked!");
+   };
 
-    <Button onClick={handleButtonClick} />
-    ```
+   <Button onClick={handleButtonClick} />;
+   ```
 
 8. **Conditional Values:**
+
    - You can pass boolean or conditional values to control the behavior of child components.
 
-    ```jsx
-    <ConditionalComponent showContent={true} />
-    ```
+   ```jsx
+   <ConditionalComponent showContent={true} />
+   ```
 
 These examples illustrate the flexibility of props in React. Props enable you to create dynamic and reusable components by allowing them to receive and use external data and behavior from their parent components.
 
 # What is the use of props?
+
 Props, short for "properties," play a crucial role in React and are essential for building dynamic and reusable components. The main uses of props in React include:
 
 1. **Passing Data:**
+
    - Props are primarily used for passing data from a parent component to a child component. This allows you to make your components dynamic by providing them with the information they need to render and behave in different ways.
 
-    ```jsx
-    // Parent Component
-    const App = () => {
-      const message = "Hello from props!";
-      return <ChildComponent greeting={message} />;
-    };
+   ```jsx
+   // Parent Component
+   const App = () => {
+     const message = "Hello from props!";
+     return <ChildComponent greeting={message} />;
+   };
 
-    // Child Component
-    const ChildComponent = (props) => {
-      return <p>{props.greeting}</p>;
-    };
-    ```
+   // Child Component
+   const ChildComponent = (props) => {
+     return <p>{props.greeting}</p>;
+   };
+   ```
 
 2. **Component Configuration:**
+
    - Props enable you to configure a child component's behavior by passing various values, such as styles, classNames, or conditional flags.
 
-    ```jsx
-    // Parent Component
-    const App = () => {
-      const style = { color: 'blue', fontSize: '16px' };
-      return <StyledComponent style={style} />;
-    };
+   ```jsx
+   // Parent Component
+   const App = () => {
+     const style = { color: "blue", fontSize: "16px" };
+     return <StyledComponent style={style} />;
+   };
 
-    // Child Component
-    const StyledComponent = (props) => {
-      return <div style={props.style}>Stylish content</div>;
-    };
-    ```
+   // Child Component
+   const StyledComponent = (props) => {
+     return <div style={props.style}>Stylish content</div>;
+   };
+   ```
 
 3. **Dynamic Rendering:**
+
    - Props allow you to conditionally render different content or apply different styles based on the data received from the parent component.
 
-    ```jsx
-    // Parent Component
-    const App = () => {
-      const isLoggedIn = true;
-      return <Greeting isLoggedIn={isLoggedIn} />;
-    };
+   ```jsx
+   // Parent Component
+   const App = () => {
+     const isLoggedIn = true;
+     return <Greeting isLoggedIn={isLoggedIn} />;
+   };
 
-    // Child Component
-    const Greeting = (props) => {
-      return (
-        <div>
-          {props.isLoggedIn ? <p>Welcome, User!</p> : <p>Please log in</p>}
-        </div>
-      );
-    };
-    ```
+   // Child Component
+   const Greeting = (props) => {
+     return (
+       <div>
+         {props.isLoggedIn ? <p>Welcome, User!</p> : <p>Please log in</p>}
+       </div>
+     );
+   };
+   ```
 
 4. **Event Handling:**
+
    - Props are used to pass callback functions and event handlers from a parent component to a child component, allowing child components to communicate with the parent or trigger specific actions.
 
-    ```jsx
-    // Parent Component
-    const App = () => {
-      const handleClick = () => {
-        console.log('Button clicked!');
-      };
+   ```jsx
+   // Parent Component
+   const App = () => {
+     const handleClick = () => {
+       console.log("Button clicked!");
+     };
 
-      return <Button onClick={handleClick} />;
-    };
+     return <Button onClick={handleClick} />;
+   };
 
-    // Child Component
-    const Button = (props) => {
-      return <button onClick={props.onClick}>Click me</button>;
-    };
-    ```
+   // Child Component
+   const Button = (props) => {
+     return <button onClick={props.onClick}>Click me</button>;
+   };
+   ```
 
 5. **Data Flow:**
+
    - Props establish a unidirectional data flow in React, where data flows from parent components down to their children. This makes it easier to reason about the application's state and helps maintain a clear and predictable data flow.
 
 6. **Reusability:**
@@ -1225,19 +1225,22 @@ Props, short for "properties," play a crucial role in React and are essential fo
 
 In summary, props are a fundamental concept in React that facilitates the communication of data and behavior between components. They enable the creation of flexible, dynamic, and reusable components, contributing to the declarative and efficient nature of React applications.
 
-
 # What are keys and why do we use them in lists?
+
 In React, a "key" is a special string attribute that needs to be included when creating lists of elements. The primary purpose of keys is to help React identify which items have changed, been added, or been removed from a list. Keys assist in maintaining the state of the components efficiently, particularly during updates and re-rendering.
 
 **Why use keys in lists?**
 
 1. **Optimizing React's Reconciliation Algorithm:**
+
    - React uses a process called "reconciliation" to determine the differences between the previous and current states of a component and update the UI accordingly. When dealing with lists, React uses keys to quickly identify which items have changed, preventing unnecessary re-rendering of unchanged items.
 
 2. **Preserving Component State:**
+
    - Keys help React maintain the state of components even as the list changes. Without keys, React might consider a component to be removed and a new one to be added, resulting in the loss of local state, user input, or other component-specific data.
 
 3. **Efficient Updates:**
+
    - When an item in a list changes or is reordered, React can use keys to efficiently update the DOM by reordering or changing only the affected elements, rather than re-rendering the entire list.
 
 4. **Preventing Duplicate Keys:**
@@ -1248,14 +1251,14 @@ In React, a "key" is a special string attribute that needs to be included when c
 ```jsx
 const MyList = () => {
   const items = [
-    { id: 1, text: 'Item 1' },
-    { id: 2, text: 'Item 2' },
-    { id: 3, text: 'Item 3' },
+    { id: 1, text: "Item 1" },
+    { id: 2, text: "Item 2" },
+    { id: 3, text: "Item 3" },
   ];
 
   return (
     <ul>
-      {items.map(item => (
+      {items.map((item) => (
         <li key={item.id}>{item.text}</li>
       ))}
     </ul>
@@ -1268,9 +1271,11 @@ In this example, the `key` attribute is set to the `id` property of each item in
 **Guidelines for using keys:**
 
 1. **Keys Should Be Unique:**
+
    - Keys must be unique among siblings in a list. Using non-unique keys can lead to unpredictable behavior.
 
 2. **Keys Should Be Stable:**
+
    - Keys should be stable and not change over time unless absolutely necessary. Changing keys can negatively impact performance and lead to unnecessary re-renders.
 
 3. **Avoid Using Array Index as Keys:**
@@ -1279,27 +1284,35 @@ In this example, the `key` attribute is set to the `id` property of each item in
 By following these guidelines, you can ensure that keys serve their intended purpose, facilitating efficient updates and preserving component state in React lists.
 
 # Why does React maintain a Virtual DOM?
+
 React maintains a Virtual DOM (Document Object Model) as an abstraction of the actual DOM in the browser. The Virtual DOM is an in-memory representation of the real DOM elements, and React uses it to efficiently manage updates and improve the performance of rendering in web applications. Here are the key reasons why React uses a Virtual DOM:
 
 1. **Efficient DOM Manipulation:**
+
    - Direct manipulation of the actual DOM can be slow and resource-intensive. The Virtual DOM allows React to perform all necessary computations and updates in-memory first, minimizing the number of manipulations required on the real DOM.
 
 2. **Batched Updates:**
+
    - React batches multiple updates to the Virtual DOM and then applies them to the actual DOM in a single batch. This batched approach reduces the number of reflows and repaints in the browser, leading to better performance.
 
 3. **Reconciliation Algorithm:**
+
    - React's Virtual DOM is integral to its reconciliation algorithm, which efficiently calculates the difference (diffing) between the current Virtual DOM and the new one after a state or prop change. This process helps identify the minimal set of changes needed to update the actual DOM, optimizing rendering performance.
 
 4. **Declarative Programming Model:**
+
    - React encourages a declarative programming model, where developers describe the desired UI state, and React takes care of updating the DOM to reflect that state. The Virtual DOM plays a crucial role in making this declarative approach efficient and practical.
 
 5. **Cross-Browser Consistency:**
+
    - Different browsers may have slightly different implementations of the DOM API, leading to inconsistencies and compatibility issues. React's Virtual DOM provides a consistent and predictable interface for React components, abstracting away browser-specific details.
 
 6. **State Preservation During Updates:**
+
    - The Virtual DOM helps React preserve the state of components during updates. When components re-render, React can efficiently compare the new Virtual DOM with the previous one, ensuring that only the necessary updates are applied to the actual DOM, while maintaining the state of components that haven't changed.
 
 7. **Facilitates Component Reusability:**
+
    - The Virtual DOM enables the efficient re-rendering of components, promoting their reuse throughout the application. Reusable components can be composed, and updates are managed more efficiently, enhancing code maintainability and scalability.
 
 8. **Improved Performance in Single-Page Applications (SPAs):**
