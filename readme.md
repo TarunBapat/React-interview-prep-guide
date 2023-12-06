@@ -1,3 +1,5 @@
+[Go to Specific Section](#specific-section)
+
 # What would happen if we directly run JSX in Browser?
 
 If you try to directly run JSX (JavaScript XML) in a web browser, it will typically result in an error. JSX is a syntax extension for JavaScript often used with libraries like React. JSX code needs to be transpiled into regular JavaScript code before it can be executed in a web browser.
@@ -214,6 +216,8 @@ class MyComponent extends React.Component {
 ```
 
 In summary, passing `props` to `super(props)` in the constructor is crucial for correctly initializing your React class components and ensuring that `this.props` is available throughout the component. Failing to do so will result in errors and unexpected behavior when trying to access and use `props` in your component.
+
+## Specific Section
 
 # How to apply validation on Props in ReactJS?
 
