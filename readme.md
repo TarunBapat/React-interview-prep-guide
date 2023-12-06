@@ -1654,3 +1654,5 @@ Here are some common use cases for refs:
    ```
 
 It's important to note that while refs provide a way to interact with the DOM imperatively, using them excessively can go against React's declarative paradigm. In many cases, you can achieve the same results by managing state and props in a more declarative way. Use refs judiciously and consider whether a particular use case genuinely requires imperative interactions with the DOM or component instances.
+
+## javascript-section
