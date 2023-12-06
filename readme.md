@@ -1655,4 +1655,56 @@ Here are some common use cases for refs:
 
 It's important to note that while refs provide a way to interact with the DOM imperatively, using them excessively can go against React's declarative paradigm. In many cases, you can achieve the same results by managing state and props in a more declarative way. Use refs judiciously and consider whether a particular use case genuinely requires imperative interactions with the DOM or component instances.
 
+# forwardref with example?
+
+In React, the `forwardRef` function is used to forward refs from a parent component to a child component, allowing the parent to interact with the child component's DOM or to call methods on the child component.
+
+Here's an example of how you can use `forwardRef`:
+
+```jsx
+import React, { forwardRef, useRef, useImperativeHandle } from "react";
+
+// Child component
+const ChildComponent = forwardRef((props, ref) => {
+  const inputRef = useRef();
+
+  // Expose a method to the parent component using useImperativeHandle
+  useImperativeHandle(ref, () => ({
+    focusInput: () => {
+      inputRef.current.focus();
+    },
+    // You can expose other methods or values here
+  }));
+
+  return <input ref={inputRef} />;
+});
+
+// Parent component
+const ParentComponent = () => {
+  const childRef = useRef();
+
+  const handleClick = () => {
+    // Call the focusInput method on the child component
+    childRef.current.focusInput();
+  };
+
+  return (
+    <div>
+      <ChildComponent ref={childRef} />
+      <button onClick={handleClick}>Focus Input</button>
+    </div>
+  );
+};
+
+export default ParentComponent;
+```
+
+In this example:
+
+- The `ChildComponent` uses `forwardRef` to forward the `ref` from the parent to the input element.
+- Inside the `ChildComponent`, a `useImperativeHandle` hook is used to expose a method (`focusInput`) to the parent component. This method focuses on the input element.
+- The `ParentComponent` renders the `ChildComponent` and has a button that, when clicked, calls the `focusInput` method on the child component.
+
+This way, the parent component can interact with the child component's internal functionality, like focusing on an input element, even though the child component manages its own state and behavior. The `forwardRef` and `useImperativeHandle` combination is a common pattern when you need to expose methods or properties of a child component to its parent.
+
 ## javascript-section
