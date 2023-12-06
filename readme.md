@@ -1,4 +1,9 @@
-[Go to Specific Section](#specific-section)
+[React](#React-section)
+[javascript](#javascript-section)
+[HTML](#html-section)
+[CSS](#css-section)
+
+## React-section
 
 # What would happen if we directly run JSX in Browser?
 
@@ -216,8 +221,6 @@ class MyComponent extends React.Component {
 ```
 
 In summary, passing `props` to `super(props)` in the constructor is crucial for correctly initializing your React class components and ensuring that `this.props` is available throughout the component. Failing to do so will result in errors and unexpected behavior when trying to access and use `props` in your component.
-
-## Specific Section
 
 # How to apply validation on Props in ReactJS?
 
