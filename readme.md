@@ -1321,3 +1321,62 @@ React maintains a Virtual DOM (Document Object Model) as an abstraction of the a
    - In SPAs, where updates and state changes are frequent, the Virtual DOM helps minimize the performance impact by reducing the number of direct interactions with the real DOM. This results in a smoother user experience.
 
 In summary, React's Virtual DOM is a crucial optimization strategy that helps React applications achieve better performance by efficiently managing updates and interactions with the actual DOM. It is a key factor in making React applications responsive, scalable, and suitable for building complex user interfaces.
+
+# What is the impact of indexes as keys?
+
+Indexes play a crucial role in databases, and they are used to optimize the retrieval of data from tables. When it comes to using indexes as keys, it generally refers to using indexed columns as primary keys or unique constraints. Here are some impacts of using indexes as keys:
+
+1. **Faster Data Retrieval:**
+
+   - Indexes provide a way to quickly locate and retrieve specific rows from a table. When a column with a unique constraint or a primary key is indexed, searching for specific values in that column becomes more efficient.
+
+2. **Improved Query Performance:**
+
+   - Queries that involve conditions or clauses based on the indexed column(s) can benefit significantly from using indexes. The database engine can use the index to quickly locate the relevant rows, reducing the time and resources required to execute the query.
+
+3. **Enforcement of Uniqueness:**
+
+   - When an index is created on a column with a unique constraint or as a primary key, it ensures that the values in that column are unique across the table. This helps maintain data integrity by preventing duplicate entries in the indexed column.
+
+4. **Optimized Joins:**
+
+   - Indexes on columns that are involved in join operations can enhance the performance of those queries. The database engine can use the indexes to efficiently match rows from different tables, reducing the overall query execution time.
+
+5. **Sorting and Grouping:**
+
+   - Indexes can also benefit queries that involve sorting or grouping based on the indexed column(s). The ordered structure of the index allows the database engine to avoid full table scans when performing such operations.
+
+6. **Reduced Disk I/O:**
+   - Efficient use of indexes can lead to a reduction in the amount of disk I/O (Input/Output) required to fetch data. Instead of scanning the entire table, the database engine can navigate through the index structure to locate the relevant data more quickly.
+
+While indexes bring many advantages, it's essential to consider the potential downsides as well. Indexes consume storage space, and they come with maintenance costs, as they need to be updated whenever the underlying data changes. Additionally, over-indexing (creating too many indexes) can lead to performance degradation during data modification operations (inserts, updates, and deletes). Therefore, it's crucial to strike a balance and carefully choose which columns to index based on the specific needs of the application.
+
+# Why does React use className over class attribute?
+
+In React, the decision to use `className` instead of `class` is related to how JSX (JavaScript XML) works and the underlying nature of JavaScript.
+
+JSX is a syntax extension for JavaScript that looks similar to XML or HTML but is designed to work seamlessly with JavaScript. When you write JSX code in React, it gets transpiled into regular JavaScript by tools like Babel before being executed by the browser.
+
+The reason React uses `className` instead of `class` is to avoid conflicts with the JavaScript keyword `class`. In JavaScript, `class` is a reserved keyword used to define a class. By using `className` instead of `class`, React ensures that there is no naming conflict between the JSX attribute and the JavaScript keyword.
+
+For example, consider the following JSX code:
+
+```jsx
+// Using class (which would lead to a syntax error)
+<div class="my-class">Hello, React!</div>
+
+// Using className (correct usage in React)
+<div className="my-class">Hello, React!</div>
+```
+
+When Babel transpiles this JSX code, it will generate JavaScript that uses `class` for defining classes and `className` for specifying CSS classes:
+
+```javascript
+// Incorrect transpilation (syntax error)
+React.createElement("div", { class: "my-class" }, "Hello, React!");
+
+// Correct transpilation
+React.createElement("div", { className: "my-class" }, "Hello, React!");
+```
+
+In summary, the use of `className` in React is a design choice to avoid naming conflicts with JavaScript keywords. It allows React developers to use a familiar attribute (`class`) in JSX without introducing syntax errors when transpiling to JavaScript.
