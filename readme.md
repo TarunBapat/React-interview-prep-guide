@@ -90,7 +90,8 @@ Here's how you can use React Hooks with static typing in TypeScript:
 
 By using TypeScript with React Hooks, you can catch type-related errors at compile-time, which can help prevent many common runtime errors. It also provides better code documentation and assists other developers who work with your code by making the expected types explicit.
 
-What are hooks?
+# What are hooks?
+
 In React, hooks are functions that allow you to "hook into" React state and lifecycle features from functional components. They were introduced in React 16.8 to provide a more expressive and flexible way to work with state and side effects in functional components, eliminating the need to use class components for managing state.
 
 # What is Context?
@@ -446,7 +447,8 @@ In the above example, the content wrapped in the `MyPortalComponent` will be ren
 
 Portals provide a way to work around the normal constraints of the React component tree and can be particularly useful for cases where you need to render content above everything else or in a different part of the document. However, use portals judiciously, as they can make your code more complex and harder to understand if not used carefully.
 
-What is the purpose of the callback function as an argument of setState()?
+# What is the purpose of the callback function as an argument of setState()?
+
 In React, the `setState()` function is used to update the state of a component. It's important to understand that `setState()` is asynchronous, which means that React may batch multiple state updates together for performance reasons. Because of this asynchronicity, React provides a way to pass a callback function as an argument to `setState()`, which is executed after the state has been updated. The primary purpose of the callback function is to perform additional operations that rely on the updated state or to ensure that some code runs after the state update is complete.
 
 Here's an example of how you can use a callback function with `setState()`:
