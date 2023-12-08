@@ -1707,4 +1707,121 @@ In this example:
 
 This way, the parent component can interact with the child component's internal functionality, like focusing on an input element, even though the child component manages its own state and behavior. The `forwardRef` and `useImperativeHandle` combination is a common pattern when you need to expose methods or properties of a child component to its parent.
 
+https://codesandbox.io/s/silent-breeze-2txndg?file=/src/Parent.js
+https://react.dev/reference/react/useImperativeHandle
+
 ## javascript-section
+
+# Closures with example in javascript?
+
+In JavaScript, a closure is created when a function is defined inside another function and has access to the outer function's variables. This allows the inner function to "remember" the environment in which it was created, even after the outer function has finished executing. Closures are a powerful and useful feature in JavaScript, often used for data encapsulation, private variables, and creating functions with persistent state.
+
+Here's a simple example to illustrate closures:
+
+```javascript
+function outerFunction() {
+  // Outer function scope
+  let outerVariable = "I am from the outer function";
+
+  function innerFunction() {
+    // Inner function scope
+    console.log(outerVariable); // Accessing outer variable
+  }
+
+  // Returning the inner function
+  return innerFunction;
+}
+
+// Create a closure by calling outerFunction and assigning the result to a variable
+let closureExample = outerFunction();
+
+// Call the closure, which still has access to outerVariable
+closureExample(); // Output: "I am from the outer function"
+```
+
+In this example:
+
+1. `outerFunction` declares a variable `outerVariable` and defines an inner function `innerFunction`.
+2. `innerFunction` has access to `outerVariable` due to the closure created when it was defined inside `outerFunction`.
+3. When `outerFunction` is called and assigned to `closureExample`, it returns the `innerFunction`.
+4. When `closureExample` is invoked, it can still access `outerVariable` even though `outerFunction` has already finished executing.
+
+Closures are commonly used to create private variables and methods. Here's an example:
+
+```javascript
+function counter() {
+  let count = 0;
+
+  return {
+    increment: function () {
+      count++;
+    },
+    getCount: function () {
+      return count;
+    },
+  };
+}
+
+let myCounter = counter();
+
+myCounter.increment();
+myCounter.increment();
+
+console.log(myCounter.getCount()); // Output: 2
+```
+
+In this example, the `counter` function returns an object with two methods (`increment` and `getCount`). The `count` variable is private and can only be accessed or modified through these methods, creating a form of encapsulation using closures.
+
+# call bind apply with example javascript
+
+In JavaScript, `call`, `bind`, and `apply` are methods that are used to manipulate the context (value of `this`) of a function during its execution.
+
+1. **`call` method:**
+   The `call` method is used to invoke a function with a specific `this` value and arguments provided individually.
+
+   ```javascript
+   function greet(name) {
+     console.log(`Hello, ${name}! My name is ${this.name}.`);
+   }
+
+   const person = { name: "John" };
+
+   greet.call(person, "Alice");
+   // Output: Hello, Alice! My name is John.
+   ```
+
+2. **`apply` method:**
+   The `apply` method is similar to `call`, but it accepts arguments as an array.
+
+   ```javascript
+   function greet(name, city) {
+     console.log(
+       `Hello, ${name}! My name is ${this.name}, and I live in ${city}.`
+     );
+   }
+
+   const person = { name: "John" };
+
+   greet.apply(person, ["Alice", "New York"]);
+   // Output: Hello, Alice! My name is John, and I live in New York.
+   ```
+
+3. **`bind` method:**
+   The `bind` method creates a new function with the same body as the original function but with a fixed `this` value.
+
+   ```javascript
+   function greet(name) {
+     console.log(`Hello, ${name}! My name is ${this.name}.`);
+   }
+
+   const person = { name: "John" };
+
+   const greetPerson = greet.bind(person);
+
+   greetPerson("Alice");
+   // Output: Hello, Alice! My name is John.
+   ```
+
+   In this example, `bind` is used to create a new function `greetPerson` with the `this` value set to `person`. When `greetPerson` is invoked, it behaves as if it were called using `call` with `person` as the context.
+
+These methods are particularly useful when working with functions that expect a specific context for proper execution, such as methods within objects or when dealing with callback functions.
