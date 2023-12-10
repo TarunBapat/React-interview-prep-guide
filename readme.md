@@ -1,5 +1,6 @@
 [React](#React-section)
 [javascript](#javascript-section)
+[Networking](#Networking-section)
 [HTML](#html-section)
 [CSS](#css-section)
 
@@ -2584,6 +2585,58 @@ This way, the parent component can interact with the child component's internal 
 
 https://codesandbox.io/s/silent-breeze-2txndg?file=/src/Parent.js
 https://react.dev/reference/react/useImperativeHandle
+
+# useReducer hook with example
+
+The `useReducer` hook in React is a state management hook that is used as an alternative to `useState` when more complex state logic is needed. It is particularly useful when the next state depends on the previous one and when there are multiple ways to update the state. The `useReducer` hook takes a reducer function and an initial state as arguments and returns the current state and a dispatch function to trigger state updates.
+
+Here's an example of using `useReducer`:
+
+```jsx
+import React, { useReducer } from 'react';
+
+// Reducer function
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    case 'RESET':
+      return { count: 0 };
+    default:
+      return state;
+  }
+};
+
+// Component using useReducer
+const Counter = () => {
+  // useReducer returns the current state and a dispatch function
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+      <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+In this example:
+
+- The `counterReducer` function is a pure function that takes the current state and an action as arguments and returns the new state based on the action type.
+- The `Counter` component initializes the state using `useReducer(counterReducer, { count: 0 })`, where `counterReducer` is the reducer function, and `{ count: 0 }` is the initial state.
+- The component renders the current count from the state and provides buttons to dispatch different actions (`INCREMENT`, `DECREMENT`, `RESET`) to update the state.
+
+When a button is clicked, it dispatches an action to the reducer, and the reducer updates the state accordingly. The component then re-renders with the new state.
+
+This is a simple example, but `useReducer` becomes particularly powerful as the state logic grows in complexity or when you have multiple actions that need to update the state in a coordinated way.
+
 
 ## javascript-section
 
