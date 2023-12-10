@@ -2184,12 +2184,29 @@ const DebounceExample = () => {
   const debouncedSearch = debounce(search, 300);
 
   // Event handler for input changes
-  const handleInputChange = (event) => {
+   const handleInputChange = (event) => {
     const { value } = event.target;
     setSearchTerm(value);
 
     // Call the debounced search function
     debouncedSearch(value);
+  };
+
+  return (
+    <div>
+      <h2>Debouncing Example</h2>
+      <input
+        type="text"
+        placeholder="Type here..."
+        value={searchTerm}
+        onChange={handleInputChange}
+      />
+    </div>
+  );
+};
+
+export default DebounceExample;
+```
 # What is the impact of indexes as keys?
 
 Indexes play a crucial role in databases, and they are used to optimize the retrieval of data from tables. When it comes to using indexes as keys, it generally refers to using indexed columns as primary keys or unique constraints. Here are some impacts of using indexes as keys:
