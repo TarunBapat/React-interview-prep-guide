@@ -1712,6 +1712,195 @@ https://react.dev/reference/react/useImperativeHandle
 
 ## javascript-section
 
+# what is hoisting explain with example
+
+Hoisting is a behavior in JavaScript where variable and function declarations are moved to the top of their containing scope during the compilation phase. This means that you can use a variable or call a function before it's declared in your code. However, it's important to note that only the declarations are hoisted, not the initializations.
+
+Here's a simple example to illustrate hoisting with variable declarations:
+
+```javascript
+console.log(x); // Outputs: undefined
+var x = 5;
+console.log(x); // Outputs: 5
+```
+
+Even though `console.log(x)` appears before the declaration of `var x = 5;`, it doesn't result in an error. The declaration of `x` is hoisted to the top of its scope, so the code is effectively interpreted as follows:
+
+```javascript
+var x;
+console.log(x); // Outputs: undefined
+x = 5;
+console.log(x); // Outputs: 5
+```
+
+Now, let's see an example with function declarations:
+
+```javascript
+sayHello(); // Outputs: "Hello, world!"
+
+function sayHello() {
+  console.log("Hello, world!");
+}
+```
+
+In this example, the function `sayHello` is called before its declaration, and it works because the function declaration is hoisted to the top of its scope.
+
+However, it's important to note that hoisting doesn't occur in the same way for variable initializations or assignments. Only declarations are hoisted, not the assignments. For example:
+
+```javascript
+console.log(y); // Outputs: undefined
+var y = 10;
+console.log(y); // Outputs: 10
+```
+
+Here, the declaration of `y` is hoisted, but the assignment (`y = 10;`) remains in its original position.
+
+# Higher order functions
+
+In JavaScript, a higher-order function is a function that either takes one or more functions as arguments or returns a function as its result. This concept is derived from functional programming and is a powerful paradigm in JavaScript. Higher-order functions enable you to write more reusable and modular code.
+
+Here are some common higher-order functions and examples of their usage:
+
+1. **map:**
+
+   - The `map` function applies a given function to each element of an array and returns a new array of the results.
+
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const squared = numbers.map((x) => x * x);
+   // squared is now [1, 4, 9, 16, 25]
+   ```
+
+2. **filter:**
+
+   - The `filter` function creates a new array containing only the elements that satisfy a given condition.
+
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const evens = numbers.filter((x) => x % 2 === 0);
+   // evens is now [2, 4]
+   ```
+
+3. **reduce:**
+
+   - The `reduce` function reduces an array to a single value by applying a function cumulatively to the elements.
+
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const sum = numbers.reduce(
+     (accumulator, currentValue) => accumulator + currentValue,
+     0
+   );
+   // sum is now 15
+   ```
+
+4. **forEach:**
+
+   - The `forEach` function iterates over each element in an array and applies a function to each.
+
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   numbers.forEach((x) => console.log(x * 2));
+   // Outputs: 2, 4, 6, 8, 10
+   ```
+
+5. **Function Composition:**
+
+   - You can create higher-order functions by composing functions, where the result of one function becomes the input for another.
+
+   ```javascript
+   const add = (x) => x + 2;
+   const multiply = (x) => x * 3;
+
+   const composedFunction = (input) => multiply(add(input));
+   console.log(composedFunction(5)); // Outputs: 21 (add(5) * 3)
+   ```
+
+These higher-order functions promote a more declarative and expressive style of programming in JavaScript, allowing you to write concise and readable code. They are widely used in modern JavaScript development, especially in the context of functional programming.
+
+# What is memoization
+
+Memoization is an optimization technique used in computer programming to speed up the execution of functions by caching their results. The basic idea is to store the results of expensive function calls and return the cached result when the same inputs occur again. This can be particularly useful for functions that are computationally expensive or involve repetitive calculations.
+
+In JavaScript, you can implement memoization using an object to store the results. Here's a simple example of a memoized Fibonacci function:
+
+```javascript
+function fibonacci(n, memo = {}) {
+  if (n <= 1) {
+    return n;
+  }
+
+  // Check if the result is already memoized
+  if (memo[n] !== undefined) {
+    return memo[n];
+  }
+
+  // Calculate the Fibonacci number and memoize the result
+  memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+
+  return memo[n];
+}
+
+console.log(fibonacci(5)); // Outputs: 5
+console.log(fibonacci(10)); // Outputs: 55
+```
+
+In this example, the `fibonacci` function calculates Fibonacci numbers using recursion. The `memo` object is used to store the results of previous calculations. Before performing a recursive call, the function checks if the result for a given `n` is already in the `memo` object. If it is, the cached result is returned, avoiding redundant calculations.
+
+Memoization can significantly improve the performance of recursive or repetitive functions by trading space (memory) for time. It's important to note that memoization is most effective when a function is repeatedly called with the same arguments. If the function is called with different arguments each time, memoization may not provide significant benefits.
+
+# Currying in js
+
+Currying is a technique in functional programming where a function is transformed into a sequence of functions, each taking a single argument. In JavaScript, currying allows you to create more specialized and reusable functions by breaking down a function that takes multiple arguments into a series of functions that each take a single argument.
+
+Here's a basic example of currying in JavaScript:
+
+```javascript
+// Non-curried function
+function add(x, y) {
+  return x + y;
+}
+
+console.log(add(2, 3)); // Outputs: 5
+
+// Curried version of the add function
+function curryAdd(x) {
+  return function (y) {
+    return x + y;
+  };
+}
+
+// Usage of curried function
+const add2 = curryAdd(2);
+console.log(add2(3)); // Outputs: 5
+```
+
+In the example above, `curryAdd` is a curried version of the `add` function. It takes a single argument `x` and returns a new function that takes another argument `y`. The returned function, `add2`, can then be called with the second argument.
+
+Currying is useful for creating more modular and reusable functions. It's often employed in libraries and functional programming frameworks. Some JavaScript libraries, like lodash, provide a `curry` function to curry existing functions.
+
+Here's an example using lodash:
+
+```javascript
+const _ = require("lodash");
+
+// Non-curried function
+function multiply(x, y, z) {
+  return x * y * z;
+}
+
+// Curried version using lodash
+const curriedMultiply = _.curry(multiply);
+
+// Partial application
+const multiplyBy2 = curriedMultiply(2);
+const multiplyBy2And3 = multiplyBy2(3);
+
+console.log(multiplyBy2And3(4)); // Outputs: 24 (2 * 3 * 4)
+```
+
+In this example, `_.curry` from lodash is used to create a curried version of the `multiply` function. The curried function can be partially applied to create new functions with fewer arguments, providing flexibility and reusability.
+
 # Closures with example in javascript?
 
 In JavaScript, a closure is created when a function is defined inside another function and has access to the outer function's variables. This allows the inner function to "remember" the environment in which it was created, even after the outer function has finished executing. Closures are a powerful and useful feature in JavaScript, often used for data encapsulation, private variables, and creating functions with persistent state.
