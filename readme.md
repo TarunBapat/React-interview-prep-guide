@@ -1,9 +1,9 @@
-[React](#React-section)
-[javascript](#javascript-section)
-[Networking](#Networking-section)
-[React-codes](#React-codes-section)
-[HTML](#html-section)
-[CSS](#css-section)
+1. [React](#React-section)
+2. [javascript](#javascript-section)
+3. [Networking](#Networking-section)
+4. [React-codes](#React-codes-section)
+5. [HTML](#html-section)
+6. [CSS](#css-section)
 
 ## React-section
 
