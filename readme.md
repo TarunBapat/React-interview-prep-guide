@@ -8,6 +8,45 @@
 
 ## React-section
 
+# What is React
+
+**React** is an open-source JavaScript library for building user interfaces, particularly for single-page applications where the user interacts with the page, and the content is dynamically updated without requiring a full page reload. It was developed by Facebook and is now maintained by Facebook and a community of individual developers and companies.
+
+Key features and concepts of React include:
+
+1. **Component-Based Architecture:**
+
+   - React follows a component-based architecture, where the user interface is broken down into modular, reusable components. Each component encapsulates its own logic and can be composed together to build complex user interfaces.
+
+2. **Virtual DOM (Document Object Model):**
+
+   - React uses a virtual DOM to efficiently update the actual DOM. Instead of directly manipulating the DOM for every change, React creates a virtual representation of the DOM in memory and calculates the most efficient way to update the actual DOM.
+
+3. **Declarative Syntax:**
+
+   - React uses a declarative syntax, allowing developers to describe how the UI should look and behave, and React takes care of updating the DOM to match that description. This is in contrast to imperative programming, where developers would explicitly give step-by-step instructions on how to update the UI.
+
+4. **JSX (JavaScript XML):**
+
+   - React uses JSX, a syntax extension that allows writing HTML-like code in JavaScript. JSX makes it easier to create and visualize components in a syntax that looks similar to HTML.
+
+5. **Unidirectional Data Flow:**
+
+   - React enforces a unidirectional data flow, meaning that data flows in one direction—from parent components to child components. This helps in maintaining a predictable state of the application and makes it easier to understand how data changes over time.
+
+6. **React Hooks:**
+
+   - Introduced in React 16.8, hooks are functions that allow functional components to have state and lifecycle features. This enables functional components to manage local state and side effects without the need for class components.
+
+7. **React Router:**
+
+   - React Router is a popular library for implementing navigation and routing in React applications. It allows developers to create a navigation structure that reflects the URL, enabling the creation of single-page applications with multiple views.
+
+8. **State Management:**
+   - React allows the management of state within components. State represents the current condition or data in a component and can be updated based on user interactions or other events.
+
+React has gained widespread adoption due to its simplicity, performance optimizations, and the ability to build scalable and maintainable user interfaces. It is commonly used in combination with other libraries and tools to create comprehensive web applications.
+
 # What would happen if we directly run JSX in Browser?
 
 If you try to directly run JSX (JavaScript XML) in a web browser, it will typically result in an error. JSX is a syntax extension for JavaScript often used with libraries like React. JSX code needs to be transpiled into regular JavaScript code before it can be executed in a web browser.
