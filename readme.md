@@ -3,9 +3,10 @@
 3. [Networking](#Networking-section)
 4. [React-codes](#React-codes-section)
 5. [React-projects](#React-projects-section)
-6. [HTML](#html-section)
-7. [CSS](#css-section)
-8. [Git](#git-section)
+6. [Typescript](#Typescript-section)
+7. [HTML](#html-section)
+8. [CSS](#css-section)
+9. [Git](#git-section)
 
 ## React-section
 
