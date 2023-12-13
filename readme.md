@@ -4040,6 +4040,8 @@ Caching is widely used in various computing scenarios, including web application
 
 ## React-codes-section
 
+# Create a form in which create 2 field username and password, use same input element for both username and password and add submit button inside form. The component should be controlled component
+
 Certainly! Below is an example of a simple React component that represents a controlled form with username and password fields sharing the same input element:
 
 ```jsx
@@ -4121,3 +4123,74 @@ export default App;
 ```
 
 Make sure you have React and ReactDOM set up in your project for these components to work.
+
+# Create a list (with name and check box) with input field and add button , and handle check box click and apply strike on checked components
+
+Certainly! Below is a simple example of how you can create a list with names, checkboxes, an input field, and an "Add" button using React. The example also includes handling the checkbox click event to apply a strike-through style to the checked items.
+
+```jsx
+import React, { useState } from "react";
+
+const App = () => {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+
+  const handleInputChange = (e) => {
+    setNewTask(e.target.value);
+  };
+
+  const handleAddTask = () => {
+    if (newTask.trim() === "") {
+      alert("Please enter a task");
+      return;
+    }
+
+    setTasks([...tasks, { text: newTask, completed: false }]);
+    setNewTask("");
+  };
+
+  const handleCheckboxChange = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
+  };
+
+  return (
+    <div>
+      <h2>Checkbox List with React</h2>
+      <div>
+        <input
+          type="text"
+          value={newTask}
+          placeholder="Add a new task"
+          onChange={handleInputChange}
+        />
+        <button onClick={handleAddTask}>Add</button>
+      </div>
+
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={() => handleCheckboxChange(index)}
+            />
+            <span
+              style={{
+                textDecoration: task.completed ? "line-through" : "none",
+              }}
+            >
+              {task.text}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
+```
+
+In this example, we use the `useState` hook to manage the state of the tasks and the new task input field. The `handleAddTask` function adds a new task to the list, and the `handleCheckboxChange` function toggles the completion status of a task. The rendering part uses the `map` function to iterate over the tasks and display them in the list. The style of the task text is dynamically updated based on whether the task is completed or not.
