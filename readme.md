@@ -1,12 +1,13 @@
 1. [React](#React-section)
 2. [Javascript](#javascript-section)
 3. [Networking](#Networking-section)
-4. [React-codes](#React-codes-section)
-5. [React-projects](#React-projects-section)
-6. [Typescript](#Typescript-section)
-7. [HTML](#html-section)
-8. [CSS](#css-section)
-9. [Git](#git-section)
+4. [javascript-codes](#Javascript-codes-section)
+5. [React-codes](#React-codes-section)
+6. [React-projects](#React-projects-section)
+7. [Typescript](#Typescript-section)
+8. [HTML](#html-section)
+9. [CSS](#css-section)
+10. [Git](#git-section)
 
 ## React-section
 
@@ -4142,6 +4143,48 @@ Here are key concepts related to caching:
 
 Caching is widely used in various computing scenarios, including web applications, databases, file systems, and networking, to enhance the responsiveness and efficiency of systems. However, effective cache management is crucial to ensure that cached data remains accurate and up-to-date.
 
+# Javascript-codes-section
+
+# create a pollyfil (custom flat function)
+
+```jsx
+
+ans:-
+const input = [1, 2, [3, 4, [5, 6], 7], 8, [9, [10, 11]]]
+/* Required output: [1,2,3,4,5,6,7,8,9,10,11] */
+
+const inputArray = [1,2,[3,4,[5,6],7],8,[9,[10,11]]]
+
+function flattenArray(arr){
+  let initialValue = [];
+
+  return arr.reduce((acc,item)=>{
+    if(Array.isArray(item)){
+      acc = acc.concat(flattenArray(item))
+    }else{
+      acc.push(item)
+    }
+
+    return acc;
+  }, initialValue)
+}
+
+console.log(flattenArray(inputArray));
+
+```
+
+# convert obj to array with keys and values in separate array
+
+```jsx
+let obj = { name: "jacky", age: 20 };
+
+console.log(Object.entries(obj));
+
+console.log(Object.keys(obj));
+
+console.log(Object.values(obj));
+```
+
 ## React-codes-section
 
 # Create a form in which create 2 field username and password, use same input element for both username and password and add submit button inside form. The component should be controlled component
@@ -4298,6 +4341,125 @@ export default App;
 ```
 
 In this example, we use the `useState` hook to manage the state of the tasks and the new task input field. The `handleAddTask` function adds a new task to the list, and the `handleCheckboxChange` function toggles the completion status of a task. The rendering part uses the `map` function to iterate over the tasks and display them in the list. The style of the task text is dynamically updated based on whether the task is completed or not.
+
+# -react que:- need to integrate an api and show it in an card view, then apply pagination with prev and next button also show individual buttons
+
+```jsx
+import { useEffect, useRef, useState } from "react";
+import "./styles.css";
+import axios from "axios";
+
+const limit = 10;
+// const createPageNumbers = [1,2,3,4,5,6,7,8,9,]
+
+export default function App() {
+  const cardDataRef = useRef([]);
+  const [cardData, setCardData] = useState([]);
+  const API = "https://jsonplaceholder.typicode.com/posts";
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    (async function () {
+      const fetchedData = await axios.get(API);
+      cardDataRef.current = fetchedData.data;
+      setCardData(fetchedData.data.slice(0, limit));
+      calculatePages(cardDataRef.current, cardData);
+    })();
+  }, []);
+
+  const calculatePages = () => {
+    const totalPages = cardDataRef.current.length / limit;
+    console.log(totalPages);
+    return Array.from(Array(totalPages).keys());
+  };
+
+  const handlePrevious = () => {
+    if (page > 1) {
+      setPage((prev) => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (page < limit) {
+      setPage((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    setCardData(cardDataRef.current.slice((page - 1) * limit, page * limit));
+  }, [page]);
+
+  return (
+    <div className="App">
+      <h1>Cards</h1>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          // justifyContent: "space-between",
+        }}
+      >
+        {cardData.map((item) => {
+          return (
+            <CardComponent
+              id={item.id}
+              title={item.title}
+              userId={item.userId}
+              body={item.body}
+            />
+          );
+        })}
+      </div>
+
+      <div>
+        <button disabled={page === 0} onClick={handlePrevious}>
+          Previous
+        </button>
+
+        <span>
+          {calculatePages().map((item) => {
+            return (
+              <span
+                style={{
+                  margin: "3px",
+                  padding: "3px",
+                  border: "1px solid black",
+                  borderRadius: "50%",
+                }}
+              >
+                {item + 1}
+              </span>
+            );
+          })}
+        </span>
+
+        <button disabled={page === limit} onClick={handleNext}>
+          Next
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const CardComponent = ({ id, title, userId, body }) => {
+  return (
+    <div
+      style={{
+        border: "1px solid black",
+        padding: "5px",
+        width: "20%",
+        height: "auto",
+      }}
+    >
+      <div>Id : {id}</div>
+      <div>User Id : {userId}</div>
+      <div>Title : {title}</div>
+      <div>Body : {body}</div>
+    </div>
+  );
+};
+```
 
 ## React-projects-section
 
