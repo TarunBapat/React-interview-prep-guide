@@ -3283,6 +3283,25 @@ Arrow functions and regular functions (also known as function declarations or fu
 
 In general, arrow functions are concise and useful for situations where lexical scoping and the lack of their own `this` context are desired. Regular functions offer more flexibility, especially in terms of their ability to be used as constructors and their distinct `this` context. The choice between them often depends on the specific requirements of a given code block or project.
 
+# what is temporal dead zone in javacript
+
+The Temporal Dead Zone (TDZ) in JavaScript refers to the period between the entering of the scope and the declaration of a variable where the variable exists but is in an uninitialized state. This occurs specifically with variables declared using `let` and `const` declarations.
+
+In JavaScript, when you declare a variable using `let` or `const`, the variable is hoisted to the top of its scope. However, unlike variables declared with `var`, variables declared with `let` and `const` are not initialized until the actual declaration statement is encountered in the code.
+
+During the TDZ, if you try to access the variable, you'll get a `ReferenceError`. This is because the variable exists in the scope, but it's in a state where it can't be accessed until after the declaration statement is encountered during the normal flow of execution.
+
+Here's an example:
+
+```javascript
+console.log(x); // ReferenceError: Cannot access 'x' before initialization
+let x = 10;
+```
+
+In this example, the `console.log(x)` statement is within the TDZ of the variable `x`, so attempting to access it before the `let x = 10` statement results in a `ReferenceError`. The variable `x` exists but is not yet initialized at the point of the `console.log` statement.
+
+Understanding the Temporal Dead Zone is important for writing predictable and bug-free JavaScript code, especially when working with `let` and `const` declarations.
+
 # Difference b/w async/await and promises
 
 `async/await` is a syntactic feature in JavaScript that simplifies working with asynchronous code, especially when dealing with Promises. While both `async/await` and Promises are mechanisms for handling asynchronous operations, they have some key differences:
@@ -4585,10 +4604,22 @@ Pseudo-elements are used to style a specific part of an element. They are denote
 
 1. `::before`: Inserts content before the actual content of the element.
 2. `::after`: Inserts content after the actual content of the element.
-3. `::first-line`: Selects the first line of a block-level element.
-4. `::first-letter`: Selects the first letter of a block-level element.
+3. `::first-line`: Selects thThe Temporal Dead Zone (TDZ) in JavaScript refers to the period between the entering of the scope and the declaration of a variable where the variable exists but is in an uninitialized state. This occurs specifically with variables declared using `let` and `const` declarations.
 
-Example of using `::before` to insert content before a paragraph:
+In JavaScript, when you declare a variable using `let` or `const`, the variable is hoisted to the top of its scope. However, unlike variables declared with `var`, variables declared with `let` and `const` are not initialized until the actual declaration statement is encountered in the code.
+
+During the TDZ, if you try to access the variable, you'll get a `ReferenceError`. This is because the variable exists in the scope, but it's in a state where it can't be accessed until after the declaration statement is encountered during the normal flow of execution.
+
+Here's an example:
+
+```javascript
+console.log(x); // ReferenceError: Cannot access 'x' before initialization
+let x = 10;
+```
+
+In this example, the `console.log(x)` statement is within the TDZ of the variable `x`, so attempting to access it before the `let x = 10` statement results in a `ReferenceError`. The variable `x` exists but is not yet initialized at the point of the `console.log` statement.
+
+Understanding the Temporal Dead Zone is important for writing predictable and bug-free JavaScript code, especially when working with `let` and `const` declarations.o insert content before a paragraph:
 
 ```css
 p::before {
