@@ -4656,4 +4656,11 @@ NVM commands
   nvm ls  (list all node versions)
   nvm install 20 (install a specific node version)
   nvm use 16 (switch to a specific version)
+  nvm alias default 16 (change default version to 16)
+  nvm ls-remote (list all versions)
+  nvm uninstall 16 (unistall version 16)
 ```
+
+# What is V8?
+
+- V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements ECMAScript and WebAssembly, and runs on Windows 7 or later, macOS 10.12+, and Linux systems that use x64, IA-32, ARM, or MIPS processors. V8 can run standalone, or can be embedded into any C++ application.
