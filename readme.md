@@ -8,6 +8,7 @@
 8. [HTML](#html-section)
 9. [CSS](#css-section)
 10. [Git](#git-section)
+11. [Command Line](#command-line-section)
 
 ## React-section
 
@@ -4646,3 +4647,13 @@ a:hover {
 ```
 
 In summary, pseudo-elements are used to style specific parts of an element, while pseudo-classes are used to style elements based on their state or position. Both provide additional flexibility in styling beyond simple element selectors.
+
+## command-line-section
+
+NVM commands
+
+```jsx
+  nvm ls  (list all node versions)
+  nvm install 20 (install a specific node version)
+  nvm use 16 (switch to a specific version)
+```
