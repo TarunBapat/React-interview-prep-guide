@@ -4672,7 +4672,7 @@ ecmascript make sure that javascript runs same across all different browsers.
 node js is c++ application with v8(dependency) embedded in it. It is a server side language
 nodejs has eventloop also as a dependency
 javascript is a single threaded langauge so when it encounters any async operation as
-setTimeout,setInterval it pushes it to a event loop and continue to a next set of taks
+setTimeout,setInterval it pushes it to a event loop and continue to a next set of tasks
 in the meantime eventloop processes the set of tasks it has and ones the javascript finishes the execution of other tasks it executes the event loop
 
 # Blocking event loop
@@ -4682,7 +4682,7 @@ let say after some async task (which is moved to eventloop) when we have the set
 # Event Emitter
 
 ```jsx
-require("EventEmitter");
+let EventEmitter = require("event");
 class Event extends EventEmitter {}
 let myEvent = new Event();
 myEvent.on("foo", () => {
@@ -4710,12 +4710,44 @@ Now when someone make a request on 8080 from their computer the request will com
 # what are Buffers
 
 Buffers provides us a way to deal with 0's and 1's.
+Buffer is basically a memory space having multiple memory blocks and each block can hold 1 byte (8bit) of data
+
+so in below example we have been given a binary string we will decode it to get actual data
+
+firstly we allocated 4 bytes of memory space
+we converted each byte to a hex code
+and then we conv erted it to utf-8
+
+decimal of 0100 1000 is 72 which is H in utf-8 encoding
+
+```jsx
+// 0100 1000 0110 1001 0010 0001
+
+const { Buffer } = require("buffer");
+let container = Buffer.alloc(3);
+container[0] = 0x48;
+container[1] = 0x69;
+container[2] = 0x21;
+console.log("container", container);
+console.log(container.toString("utf-8"));
+
+//output => Hi!
+```
+
+```jsx
+const buff = Buffer.from("Heyy", "utf-8");
+```
+
+above line of code means Buffer object will create a buffer out of string "heyy" and convert it into 0's and 1's using utf-8 encoding and put that in buffer
+
+**_ unicode _**
+unicode is a char encoding
+**_ ascii _**
+ascii is a subset of unicode
 
 binary,decimal,hexadecimal
 encoding
 decoding
-unicode
-ascii
 char encoding
 utf-8
 buffer
