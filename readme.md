@@ -4664,3 +4664,58 @@ NVM commands
 # What is V8?
 
 - V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements ECMAScript and WebAssembly, and runs on Windows 7 or later, macOS 10.12+, and Linux systems that use x64, IA-32, ARM, or MIPS processors. V8 can run standalone, or can be embedded into any C++ application.
+
+# Few points about nodejs
+
+ecmascript make sure that javascript runs same across all different browsers.
+
+node js is c++ application with v8(dependency) embedded in it. It is a server side language
+nodejs has eventloop also as a dependency
+javascript is a single threaded langauge so when it encounters any async operation as
+setTimeout,setInterval it pushes it to a event loop and continue to a next set of taks
+in the meantime eventloop processes the set of tasks it has and ones the javascript finishes the execution of other tasks it executes the event loop
+
+# Blocking event loop
+
+let say after some async task (which is moved to eventloop) when we have the set of tasks that take time to execute(example a long for loop) uptill for loop finishes execution the event loop tasks will be blocked (since javascript is a single threaded) this blocking is termed as Blocking event loop.
+
+# Event Emitter
+
+```jsx
+require("EventEmitter");
+class Event extends EventEmitter {}
+let myEvent = new Event();
+myEvent.on("foo", () => {
+  console.log("event fired");
+});
+
+myEvent.emit("foo");
+```
+
+EventEmitter is a package in node js
+In above code we created a new class Event by extending EventEmitter
+Now when the event is emitted using .emit the the code inside .on will be executed
+
+Consider a higher level example
+let say we some code written which is deployed at some server having port:8080
+
+```jsx
+myEvent.on("request", () => {
+  console.log("this code will be executed");
+});
+```
+
+Now when someone make a request on 8080 from their computer the request will come to port: 8080 server and will reach that code and executed
+
+# what are Buffers
+
+Buffers provides us a way to deal with 0's and 1's.
+
+binary,decimal,hexadecimal
+encoding
+decoding
+unicode
+ascii
+char encoding
+utf-8
+buffer
