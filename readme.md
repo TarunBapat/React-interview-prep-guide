@@ -9,6 +9,7 @@
 9. [CSS](#css-section)
 10. [Git](#git-section)
 11. [Command Line](#command-line-section)
+12. [NodeJs](#nodejs-section)
 
 ## React-section
 
@@ -4751,3 +4752,280 @@ decoding
 char encoding
 utf-8
 buffer
+
+terminal commands
+mkdir foldername
+touch filename
+open /path
+
+file system
+whole hardrive is a file
+having sequence of zeros and ones
+
+## nodejs-section
+
+# What is Node.js?
+
+Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside a web browser, using the V8 engine.
+
+# What is the difference between Node.js and JavaScript?
+
+JavaScript is a programming language, while Node.js is a runtime that allows JavaScript to run server-side.
+
+# What are the main features of Node.js?
+
+Asynchronous and Event-driven
+Single-threaded but uses non-blocking I/O
+Fast execution with the V8 engine
+Scalable
+
+# Explain the Event Loop in Node.js.
+
+The event loop is a mechanism that handles asynchronous operations in Node.js. It processes the events and callbacks, allowing non-blocking I/O.
+
+# What is the difference between blocking and non-blocking code in Node.js?
+
+Blocking code: Executes synchronously and blocks further execution until it completes.
+Non-blocking code: Executes asynchronously, allowing other code to run before the operation finishes.
+
+# What are streams in Node.js?
+
+Streams are objects that let you read data or write data continuously in chunks rather than waiting for the entire data to be processed. Types include Readable, Writable, Duplex, and Transform streams.
+
+# What are buffers in Node.js?
+
+Buffers represent raw binary data and are used to handle binary streams, such as reading files or streams from a network.
+
+# What is the purpose of the fs module in Node.js?
+
+The fs (File System) module provides file handling functionality, such as reading, writing, and deleting files.
+
+# Explain middleware in Node.js.
+
+Middleware functions in Node.js are functions that have access to the request and response objects and can modify or end the request-response cycle. They are mainly used in Express.js.
+
+# What is package.json?
+
+It is the configuration file in Node.js that contains metadata about the project, like dependencies, scripts, and version information.
+
+# What is npm?
+
+Npm (Node Package Manager) is a package manager for JavaScript that helps manage project dependencies.
+
+# What is the difference between npm install and npm ci?
+
+npm install installs dependencies listed in package.json.
+npm ci installs dependencies based on package-lock.json, ensuring exact versions are installed.
+
+# What is a callback in Node.js?
+
+A callback is a function passed as an argument to another function that will be executed once an asynchronous task completes.
+
+# What are promises in Node.js?
+
+Promises are objects representing the eventual completion or failure of an asynchronous operation and allow chaining of actions after the completion.
+
+# Explain async/await in Node.js.
+
+async and await provide a cleaner way to write asynchronous code. async functions return promises, and await waits for a promise to resolve.
+
+# How do you create a simple HTTP server in Node.js?
+
+```jsx const http = require('http');
+const server = http.createServer((req, res) => {
+  res.write("Hello World!");
+  res.end();
+});
+server.listen(3000, () => console.log("Server running on port 3000"));
+```
+
+# What is Express.js?
+
+Express.js is a lightweight web framework for Node.js that simplifies routing and middleware handling.
+
+# What are the advantages of using Express.js?
+
+Simplified routing
+Middleware support
+Flexibility for creating APIs and web applications
+
+# How can you handle errors in Node.js?
+
+Error handling can be done through:
+
+Callback functions: Pass the error as the first argument.
+try/catch blocks: For synchronous code or async/await.
+Using process.on('uncaughtException') or process.on('unhandledRejection').
+
+# What are modules in Node.js?
+
+Modules are reusable blocks of code that encapsulate related logic. Node.js uses the CommonJS module system (require and module.exports).
+
+# What is the purpose of module.exports in Node.js?
+
+It allows exporting functions, objects, or variables from a file so that they can be used in other files.
+
+# What is require() in Node.js?
+
+require() is used to import modules, files, or libraries in Node.js.
+
+# Explain the difference between module.exports and exports.
+
+module.exports: Defines what the module will export.
+exports: A shorthand for module.exports used for adding properties to the exports object.
+
+# What are the different types of streams in Node.js?
+
+Readable: Streams from which data can be read (e.g., fs.createReadStream).
+Writable: Streams to which data can be written (e.g., fs.createWriteStream).
+Duplex: Streams that are both readable and writable (e.g., sockets).
+Transform: Streams that can modify or transform the data as it is read or written (e.g., compression).
+
+# How can you read and write files in Node.js?
+
+Using the fs module:
+
+```jsx
+const fs = require("fs");
+// Reading file
+fs.readFile("file.txt", "utf8", (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+// Writing file
+fs.writeFile("file.txt", "Hello Node.js!", (err) => {
+  if (err) throw err;
+  console.log("File written!");
+});
+```
+
+26. What are clusters in Node.js?
+
+Clusters allow Node.js to spawn child processes that share the same server port, enabling multi-core systems to handle requests more efficiently.
+
+# What is the role of the cluster module in Node.js?
+
+The cluster module allows you to fork multiple child processes to take advantage of multi-core systems, improving the performance of a Node.js application.
+
+# What is REPL in Node.js?
+
+REPL (Read-Eval-Print-Loop) is an interactive environment in Node.js where you can execute JavaScript code and see the result immediately.
+
+# What are global objects in Node.js?
+
+Global objects are available in all modules and include **dirname, **filename, setTimeout, clearTimeout, console, and process.
+
+# What is the process object in Node.js?
+
+The process object is a global object that provides information about the current Node.js process, including environment variables, arguments, and methods for exiting or signaling the process.
+
+# How do you handle exceptions in Node.js?
+
+Using try/catch blocks
+Using event listeners like process.on('uncaughtException')
+Using error-handling middleware in Express.js
+
+# What is the purpose of the util module in Node.js?
+
+The util module provides utility functions, such as util.promisify for converting callback-based functions to promises and util.format for formatting strings.
+
+# What is the difference between process.nextTick() and setImmediate()?
+
+process.nextTick(): Executes code after the current operation completes but before the event loop continues.
+setImmediate(): Executes code on the next iteration of the event loop.
+
+# What is the crypto module used for in Node.js?
+
+The crypto module provides cryptographic functionality, such as creating hashes, encrypting/decrypting data, and generating random bytes.
+
+# Explain how Node.js manages memory.
+
+Node.js manages memory through V8’s garbage collector, which automatically reclaims memory by finding and cleaning up unused objects.
+
+# What is the difference between synchronous and asynchronous methods in Node.js?
+
+Synchronous: Blocks the execution until the task completes.
+Asynchronous: Non-blocking, allowing other tasks to execute while the current one is still in progress.
+
+# What is the http module in Node.js?
+
+The http module is used to create an HTTP server and client. It allows Node.js to act as a web server.
+
+# What are some common HTTP status codes in Node.js?
+
+200 OK: Successful request.
+404 Not Found: Resource not found.
+500 Internal Server Error: Server encountered an error.
+
+# What is CORS and how do you enable it in Node.js?
+
+CORS (Cross-Origin Resource Sharing) is a security feature that restricts web applications from making requests to a different domain. It can be enabled using the cors middleware in Express.js.
+
+```jsx
+const cors = require("cors");
+app.use(cors());
+```
+
+# What are web sockets in Node.js?
+
+Web sockets provide a full-duplex communication channel over a single TCP connection, enabling real-time communication between a client and server.
+
+# How do you create web sockets in Node.js?
+
+Using the ws package:
+
+```jsx
+const WebSocket = require("ws");
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on("connection", (ws) => {
+  ws.on("message", (message) => {
+    console.log(`Received message: ${message}`);
+  });
+  ws.send("Hello Client!");
+});
+```
+
+# What is the purpose of the net module in Node.js?
+
+The net module provides functions for creating TCP servers and clients.
+
+# Explain the path module in Node.js.
+
+The path module provides utilities for handling and transforming file paths.
+
+# What is the difference between absolute and relative paths in Node.js?
+
+Absolute path: Refers to the complete path from the root directory.
+Relative path: Refers to a path relative to the current directory.
+
+# What is middleware in Express.js?
+
+Middleware in Express.js refers to functions that execute during the request-response cycle. They can modify requests, send responses, or pass control to the next middleware.
+
+# What is process.env in Node.js?
+
+process.env is an object that stores environment variables that can be accessed within Node.js applications.
+
+# Explain the child_process module in Node.js.
+
+The child_process module enables you to spawn new processes, execute shell commands, or communicate with other processes.
+
+# What is the difference between spawn() and exec() in Node.js?
+
+spawn(): Executes a command and streams the output (useful for long-running processes).
+exec(): Executes a command and buffers the output (useful for short-lived processes).
+
+# What is JSON and how is it used in Node.js?
+
+JSON (JavaScript Object Notation) is a lightweight data interchange format. Node.js can parse JSON using JSON.parse() and create JSON strings using JSON.stringify().
+
+# How can you serve static files in Express.js?
+
+Using the express.static() middleware:
+
+```jsx
+app.use(express.static("public"));
+```
+
+This covers half of the questions. Let me know if you want to proceed with more questions or specific areas for more focus!
