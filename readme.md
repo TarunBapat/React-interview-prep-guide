@@ -4194,6 +4194,80 @@ console.log(flattenArray(inputArray));
 
 ```
 
+# pollyfills
+
+- Call Polyfill
+
+```jsx
+Function.prototype.myCall = function (obj, val) {
+  let functionToBeInvoked = this;
+  obj.temp = functionToBeInvoked;
+  obj.temp(val);
+};
+
+let obj = {
+  name: "xyz",
+  getName: function (name2) {
+    console.log(this.name + " " + name2);
+  },
+};
+
+let obj1 = {
+  name: "vcsgfdg",
+};
+
+obj.getName.myCall(obj1, "some ");
+```
+
+- Apply Polyfill
+
+```jsx
+Function.prototype.myCall = function (obj, val) {
+  let functionToBeInvoked = this;
+  obj.temp = functionToBeInvoked;
+  obj.temp(...val);
+};
+
+let obj = {
+  name: "xyz",
+  getName: function (val1, val2) {
+    console.log(this.name + " " + val1 + " " + val2);
+  },
+};
+
+let obj1 = {
+  name: "vcsgfdg",
+};
+
+obj.getName.myCall(obj1, ["some1", "some2", "some3"]);
+```
+
+- Bind Polyfill
+
+```jsx
+Function.prototype.myBind = function (obj) {
+  let functionToBeInvoked = this;
+  obj.temp = functionToBeInvoked;
+  return function (val) {
+    obj.temp(val);
+  };
+};
+
+let obj = {
+  name: "xyz",
+  getName: function (val1) {
+    console.log(this.name + " " + val1);
+  },
+};
+
+let obj1 = {
+  name: "vcsgfdg",
+};
+
+let bind = obj.getName.myBind(obj1);
+bind("some val");
+```
+
 # convert obj to array with keys and values in separate array
 
 ```jsx
