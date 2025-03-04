@@ -10,6 +10,7 @@
 10. [Git](#git-section)
 11. [Command Line](#command-line-section)
 12. [NodeJs](#nodejs-section)
+13. [CodeLinks](#reactjs-section)
 
 ## React-section
 
@@ -5309,4 +5310,6 @@ Using the express.static() middleware:
 app.use(express.static("public"));
 ```
 
-This covers half of the questions. Let me know if you want to proceed with more questions or specific areas for more focus!
+## reactjs-section
+
+ErrorBoundary: https://playcode.io/2281168
