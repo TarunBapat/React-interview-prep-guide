@@ -5317,3 +5317,4 @@ Todo List:
 https://codesandbox.io/p/sandbox/little-cookies-9nl66q?file=%2Fsrc%2FApp.js%3A55%2C12
 
 Autosuggestion Search:
+https://codesandbox.io/p/sandbox/cranky-andras-s6xllc?file=%2Fsrc%2FApp.js
