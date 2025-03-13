@@ -5318,3 +5318,9 @@ https://codesandbox.io/p/sandbox/little-cookies-9nl66q?file=%2Fsrc%2FApp.js%3A55
 
 Autosuggestion Search:
 https://codesandbox.io/p/sandbox/cranky-andras-s6xllc?file=%2Fsrc%2FApp.js
+
+Theme Toggle:
+https://codesandbox.io/p/sandbox/busy-vaughan-6pzpqt
+ 
+Timers:
+https://codesandbox.io/p/sandbox/ecstatic-morse-ty75dy
